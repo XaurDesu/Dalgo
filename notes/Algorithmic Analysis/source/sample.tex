@@ -1,0 +1,34 @@
+\documentclass[12pt,a4paper,red]{bbe}
+\usepackage{blindtext}
+\begin{document}
+			
+	\chapter{Algorithmic Analysis}
+	\section{Correctness}
+	An algorithm is considered correct if it solves a problem given A input, resulting in a desired B output in all possible cases.
+
+	\section{Complexity}
+	Algorithmic complexity is the approximated cost of an algorithm when running on a machine capable of computing. This kind of analysis can be quantified in time, memory, and even operational costs.
+
+	\begin{remark}
+	The method to define and value algorithms must be independent of programming language, architecture, and even more broadly, of the specific machine the algorithm runs on. This implies we don't take into account computational problems, such as compilation or, in interpreted languages, the interpretation into bytecode of the algorithm, for this doesn't concern the algorithm, but rather factors external to it.   
+	\end{remark}
+
+	\subsection{R-Complexity}
+	R is the class of decision problems solvable by a Turing machine. The main idea of it is defining a sum of the costs inside of the machine according to the operations realized by the algorithm. Resulting mathematically in the total cost of the algorithm's execution. However, R-Complexity is generally hard to compare between programming languages and individual machines because of the dependance of the result in constants.
+
+	given this definition, take as an example:
+
+	\begin{verbatim}
+	#Python pseudocode, take a list and copy it into another.
+	def Solution(list nums):
+		answer = []
+		for i in list:
+			answer.append(i)
+		return answer
+	\end{verbatim}
+
+	\subsection{Complexity Order}
+	be it 'f' and 'q' functions such as 'p' and $e$
+ \blinddocument
+ 
+\end{document}
