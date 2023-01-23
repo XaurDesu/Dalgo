@@ -799,7 +799,7 @@
 \def\footnoterule{\kern -3pt\textcolor{bbe}{\hrule width \linewidth height 0.4pt}\kern 2.6pt}
 \def\thefootnote{\color{bbe}\bfseries\sffamily(\arabic{footnote})}
 %% change every inline maths to display maths %%
-\everymath{\color{black}\displaystyle}
+\everymath{\color{black}\displaystyle\textit}
 %% increase base line skip in display formula
 \addtolength{\jot}{1pt}
 %% prevent book contents from vertical stretching %%
@@ -831,9 +831,9 @@
 	\def\@oddfoot{%
 		\textcolor{bbe!89!white}{\footnotesize\itshape\preparelabel~\preparename}%
 		\hfil\tikz[baseline=-0.8ex]{\node[sharp corners,inner sep=3pt,fill=bbe,text=white,font=\normalsize\bfseries\sffamily,text width=4ex,align=center]{\thepage};}%
-		\hfil\textcolor{bbe!89!white}{\footnotesize\itshape Institute of Technology of Cambodia}}%
+		\hfil\textcolor{bbe!89!white}{\footnotesize\itshape Jaime Andres Torres B.}}%
 	\def\@evenfoot{%
-		\textcolor{bbe!89!white}{\footnotesize\itshape Institute of Technology of Cambodia}%
+		\textcolor{bbe!89!white}{\footnotesize\itshape Jaime Andres Torres B.}%
 		\hfil\tikz[baseline=-0.8ex]{\node[sharp corners,inner sep=3pt,fill=bbe,text=white,font=\normalsize\bfseries\sffamily,text width=4ex,align=center]{\thepage};}%
 		\hfil\textcolor{bbe!89!white}{\footnotesize\itshape\preparelabel~\preparename}%
 	}%
