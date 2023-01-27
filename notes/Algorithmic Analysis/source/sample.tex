@@ -4,8 +4,13 @@
 			
 	\chapter{Algorithmic Analysis}
 	\section{Correctness}
-	An algorithm is considered correct if it solves a problem given A input, resulting in a desired B output in all possible cases.
+	A problem X is defined as an ordered (q,a) set where 'q' is a question and 'a' is an answer, written mathematically as: 
+ 
+	
+	$$X={((p(x),r(x)) | x \exists D)}$$
+	With a 'D' set of data.
 
+	An algorithm is considered correct if it solves a problem given A input, resulting in a desired B output in all possible cases.
 	\section{Complexity}
 	Algorithmic complexity is the approximated cost of an algorithm when running on a machine capable of computing. This kind of analysis can be quantified in time, memory, and even operational costs.
 
@@ -22,12 +27,69 @@
 	#Python pseudocode, take a list and copy it into another.
 	def Solution(list nums):
 		answer = []
-		for i in list:
+		for i in list:	
 			answer.append(i)
 		return answer
 	\end{verbatim}
 
 	\subsection{Complexity Order}
-	be it 'f' and 'q' functions such as 'p' and $e$
+	be it 'f' and 'q' functions such as: 
+
+	\subsubsection{Order Theorems}
+	\begin{itemize}
+		\item Constant rule: $$(\forall c  \exists  N | : cf = O(f))$$
+		\item {
+			Sum rule: $$ f + g = O(max(f,g)) $$
+			\subparagraph*{proven as:}
+			
+			}
+		\item {
+			Product rule: $$ f = O(r) \land g = O(s) \longrightarrow fg = O(rs) $$
+			\subparagraph*{proven as:}
+			
+			}
+	\end{itemize}
+
+	\subsubsection{Order classification examples}
+	\begin{enumerate}
+		\item $$2n^5 = O(n^5)$$
+		\item $$2n^5 + 4n = O(n^5) $$
+		\item $$ (2n^5 + 4n)^2 = O(n^{10})$$
+		\item $$(n+1)^2 = O(n^2)$$
+	\end{enumerate}
+
+	\subsection{Complexity orders}
+	Complexity orders are classified as follows, according to big O notation.
+	\begin{itemize}
+		\item {
+			\subparagraph*{$$O(1)$$} 
+		Constant: Execution time doesn't depend on the size of the input
+		} 
+		\item {
+			\subparagraph{$$O(log(n))$$}
+		Logarithmic: Execution time grows slower than the input size, Ex: binary search
+		}
+		\item {
+			\subparagraph{$$O(n)$$}
+		Linear: Execution time grows at the same rate as the input size, Ex. Unordered array search 
+		}
+		\item {
+			\subparagraph{$$O(n log(n))$$}
+		Log-Linear: Execution time grows at the same rate as the input size but does O(log(n)) operations per item
+		}
+		\item {
+			\subparagraph{$$O(n^2)$$}
+		Quadratic: Execution time grows at a linear rate related to the input size, but requires a linear operation per item in the input.
+		}
+		\item {
+			\subparagraph{$$O(2^n)$$}
+		Exponential: Execution time grows exponentially compared to the input
+		}
+	\end{itemize}
+
+	\
+
+
+	
  
 \end{document}
