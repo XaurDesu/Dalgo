@@ -39,15 +39,46 @@
 
 	\begin{verbatim}
 	#Python pseudocode, take a list and copy it into another.
-	def Solution(list nums):
-	    answer = []
-	    for i in list:	
-	        answer.append(i)
+	def Solution(list nums): 
+	    answer = [] # <-- R = C1 + C2
+	    for i in list: # <-- R = nC9
+	        answer.append(i) # <-- <-- R = nC8 
 	    return answer
 	\end{verbatim}
 
+	And therefore, the R-Complexity of this equation is $$R_n=C1+C2*n(C9+C8)$$ 
+
+	However, even though this algorithm might have such R-Complexity, different implementations of this 
+	same Algorithm, where the solution is expressed even slightly different, could have completely different
+	R-Complexity equations.
+
+	Take as an example:
+	\begin{verbatim}
+		#Python pseudocode, take a list and copy it into another.
+		def solution(List): 
+		answer = [] 				 # <-- R = C1 + C2
+		for i in range(0,len(List)): # <-- R = C1 + (n + 1)C3 + (n+1)C4 + nC5
+		    current = List[i]		 # <-- R = nC1 + nC6
+		    answer.append(current)   # <-- R = nC7 + nC8
+		return answer
+	\end{verbatim}
+
+	this implementation is a different algorithm that solves the exact same problem, and which R-Complexity can be
+	defined as:
+	$$ R_n = 2C_1 + C_2 + C_3 + C_4 + n(C_1 + C_3 + C_4 + C_5 + C_6+ C_7+ C_8) $$
+	This is a fairly different, much longer equation, which includes a lot more constants and a bit more complex to compute
+	Given this, sometimes R-Complexity might end up being fairly dependant on implementation when different solutions are presented.
 	\subsection{Complexity Order}
-	be it 'f' and 'q' functions such as: 
+	be it 'f' and 'q' functions such as: $f,g : \mathbb{N} \rightarrow \mathbb{R}$
+
+	we can affirm that f is of equal or lesser order to g if:
+	$$ ( \exists c, k \exists \mathbb{N} |: (\forall m \exists \mathbb{N} | k \le m : f(m) \le cg(m) ) ))$$
+
+	and we can write it as: 
+	$$f = \mathbb{O}(g) \land f(n) = O(g(n))$$
+	
+	'O' induces a partial order on functions such as $$\mathbb{N} \rightarrow \mathbb{R}$$ and 
+	is an equivalence relation over that same group of functions. 
 
 	\subsubsection{Order Theorems}
 	\begin{itemize}
