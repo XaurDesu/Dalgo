@@ -5,7 +5,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{bbe}[2020/04/20]
 \LoadClassWithOptions{book}
-\usepackage{fancyvrb}
 % geometry
 \RequirePackage{geometry}
 \geometry{%

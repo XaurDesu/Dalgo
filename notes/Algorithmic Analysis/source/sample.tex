@@ -1,5 +1,6 @@
 \documentclass[12pt,a4paper,olive]{bbe}
 \usepackage{blindtext}
+\usepackage{fancyvrb}
 \begin{document}
 			
 	\chapter{Algorithmic Analysis}
@@ -7,10 +8,21 @@
 	A problem X is defined as an ordered (q,a) set where 'q' is a question and 'a' is an answer, written mathematically as: 
  
 	
-	$$X={((p(x),r(x)) | x \exists D)}$$
-	With a 'D' set of data.
+	$$X={((q(x),a(x)) | x \exists D)}$$
+	With a 'D' arbitrary set of data.
+	
+	Q(x) is the set of questions:
+	$$ Qx = {q | (q, a) \exists X} $$
+
+	and a set of questions is solved by an algorithm 'A' if
+	$$ (\forall q \exists Px | A[q] = a :(q, a) \exists X) $$
+
+	Besides all of this, the size of a question is written as 
+	\it|q|=i\it, the difficulty of
+	a question is usually proportional to its size.
 
 	An algorithm is considered correct if it solves a problem given A input, resulting in a desired B output in all possible cases.
+	
 	\section{Complexity}
 	Algorithmic complexity is the approximated cost of an algorithm when running on a machine capable of computing. This kind of analysis can be quantified in time, memory, and even operational costs.
 
@@ -21,15 +33,17 @@
 	\subsection{R-Complexity}
 	R is the class of decision problems solvable by a Turing machine. The main idea of it is defining a sum of the costs inside of the machine according to the operations realized by the algorithm. Resulting mathematically in the total cost of the algorithm's execution. However, R-Complexity is generally hard to compare between programming languages and individual machines because of the dependance of the result in constants.
 
-	given this definition, take as an example:
+	given this definition, take as an example: 
+	\bigskip
+	\bigskip
 
 	\begin{verbatim}
 	#Python pseudocode, take a list and copy it into another.
 	def Solution(list nums):
-		answer = []
-		for i in list:	
-			answer.append(i)
-		return answer
+	    answer = []
+	    for i in list:	
+	        answer.append(i)
+	    return answer
 	\end{verbatim}
 
 	\subsection{Complexity Order}
