@@ -9,6 +9,7 @@
 	parting from previous elements of that specific succesion. These can be defined
 	in either a linear or non-linear way, depending on the problem to be solved by
 	this recursive algorithm.
+	\section{Linear Equations}
 	\subsection{Homogeneous Linear Recursive Relation}
 	A Homogeneous linear recursive relation is a relation that can be defined
 	in mathematical terms as a relation that could be expressed by the formula:
@@ -18,7 +19,57 @@
 	and that includes a characteristic polinomial that can be expressed as:
 	$$\sum_{i = 0}^{k} a_i \lambda^(n-1)$$
 
-	\subsection{Non-linear}
+	\subsection{Non-linear Recursive Relation}
+	A non linear recursive relation is a relation we can explain as defined by the formula
+	$$ \sum_{i = 0}^{k} a_i f(n-1) = \mathbb{R} $$
 
+	where the solution is different from zero.
+
+
+	\subsection{Examples}
+
+	We suppouse a $T(n)$ of the form:
+	$$ T(n) = \sum_{i=0}^{k} aT(n-i)=g(n) $$
+	we would have the solution:
+	$$T(n) = h(n)+P(n)$$
+	Where:
+
+	\begin{itemize}
+		\item $g(n)=c \rightarrow P(n)=C_0$
+		\item $ g(n) = Cn + c' \rightarrow P(n) = C_0n+C_1 $
+	\end{itemize}
+
+	\subsubsection{Example 1}
+	For the case in which T(n) is
+	$$ T(n) = \begin{cases} 
+	2\\
+	3n+3T(n-1)
+	\end{cases}  $$
+	find:
+	\begin{itemize}
+		\item h(n)
+		\item p(n)
+	\end{itemize}
+	\paragraph*{Solution}
+	to find h(n), first we define the first characteristic polynomial as:
+	$$
+	\lambda -3=0
+	$$
+	$$
+	\lambda = 3
+	$$
+
+	And the second as:
+	$$ 2 =  C_0^1 3^1$$
+	$$ \frac{2}{3} = C_0^1 $$
+
+
+	And therefore, we conclude
+	h(n) = $C_0^1 3^n$ and h(n) = $2 * 3^{n-1}$
+	
+	\section{Non-Linear Equations}
+
+	\subsection{Recurrent non-linear equations.}
+	A recurrent non-linear equation is,
 
 \end{document}
