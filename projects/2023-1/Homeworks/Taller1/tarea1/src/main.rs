@@ -15,6 +15,9 @@ fn matrix_search (nums: Vec<Vec<i32>>, target: i32) -> bool {
     return false;
 }
 
+fn number_search(nums: Vec<i32>, target: i32) {
+    
+}
 
 
 fn main() {
