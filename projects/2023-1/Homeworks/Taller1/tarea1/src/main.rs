@@ -15,8 +15,14 @@ fn matrix_search (nums: Vec<Vec<i32>>, target: i32) -> bool {
     return false;
 }
 
-fn number_search(nums: Vec<i32>, target: i32) {
-    
+fn number_search(nums: Vec<i32>, begin:i32, end:i32, target: i32) {
+    if target == nums[begin] {
+        return begin;
+    } 
+    if target == nums[end] {
+        return end;
+    }
+    number_search(nums, begin+1, end-1, target);
 }
 
 
