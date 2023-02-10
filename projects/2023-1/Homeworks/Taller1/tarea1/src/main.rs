@@ -35,4 +35,6 @@ fn main() {
     println!("Matrix search result for 1 is: {}", matrix_search(nums2, 1));
     let nums3: Vec<Vec<i32>> = vec![vec![2,0,44444],vec![121221,2,232],vec![999999,123,1]];
     println!("Matrix search result for 680 is: {}", matrix_search(nums3, 680));
+    let nums4: Vec<i32> = vec![1, 23, 44, 12, 90, 16];
+    println!("recursive number position search for vector {} for number {} is: {}",nums4,90,number_search(nums4, 0, nums4.len(),90))
 }   
