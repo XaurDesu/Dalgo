@@ -15,14 +15,8 @@ fn matrix_search (nums: Vec<Vec<i32>>, target: i32) -> bool {
     return false;
 }
 
-fn number_search(nums: Vec<i32>, begin:i32, end:i32, target: i32) {
-    if target == nums[begin] {
-        return begin;
-    } 
-    if target == nums[end] {
-        return end;
-    }
-    number_search(nums, begin+1, end-1, target);
+fn number_search(nums: Vec<i32>, begin:usize, end:usize, target: i32) -> i32 {
+    
 }
 
 
@@ -36,5 +30,4 @@ fn main() {
     let nums3: Vec<Vec<i32>> = vec![vec![2,0,44444],vec![121221,2,232],vec![999999,123,1]];
     println!("Matrix search result for 680 is: {}", matrix_search(nums3, 680));
     let nums4: Vec<i32> = vec![1, 23, 44, 12, 90, 16];
-    println!("recursive number position search for vector {} for number {} is: {}",nums4,90,number_search(nums4, 0, nums4.len(),90))
 }   
