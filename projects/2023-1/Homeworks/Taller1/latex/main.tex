@@ -1,0 +1,66 @@
+\documentclass[12pt]{exam}
+\usepackage{amsthm}
+\usepackage{libertine}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage[shortlabels]{enumitem}
+\usepackage{siunitx}
+\usepackage{cancel}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{tikz}
+
+
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+\tikzexternalize
+
+\newcommand{\class}{Course Name Here} % This is the name of the course 
+\newcommand{\examnum}{Assignment Name Here} % This is the name of the assignment
+\newcommand{\examdate}{Date Here} % This is the due date
+\newcommand{\timelimit}{}
+
+
+
+
+
+\begin{document}
+\pagestyle{plain}
+\thispagestyle{empty}
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+\textbf{\class} & \textbf{Name:} & \textit{Your Name Here}\\ %Your name here instead, obviously 
+\textbf{\examnum} &&\\
+\textbf{\examdate} &&\\
+\end{tabular*}\\
+\rule[2ex]{\textwidth}{2pt}
+% ---
+
+
+
+
+\begin{enumerate} %You can make lists!
+
+\item This is the first item.
+
+\item This will make another item. % You can do this for each question.
+
+\item Yet another item. 
+
+\item Lists within lists! \begin{enumerate}
+\item ha-HA!
+\item see?
+
+\end{enumerate}
+
+
+\end{enumerate}
+
+Look! Math! $f(x)=4x^2 - \frac{3}{4}x +1$ %use the dollar signs to go into math mode
+
+
+\end{document}
