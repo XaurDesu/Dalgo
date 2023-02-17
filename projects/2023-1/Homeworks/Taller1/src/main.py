@@ -4,12 +4,12 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 
-def matrix_multiplication(nums):
+def matrix_sum(nums):
     i = len(nums)
     j = 0
     ret = 0
     while j < i:
-        ret *= nums[j][j]
+        ret += nums[j][j]
         j += 1
     return ret
 

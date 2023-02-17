@@ -18,9 +18,9 @@
 \usepgfplotslibrary{external}
 \tikzexternalize
 
-\newcommand{\class}{Course Name Here} % This is the name of the course 
-\newcommand{\examnum}{Assignment Name Here} % This is the name of the assignment
-\newcommand{\examdate}{Date Here} % This is the due date
+\newcommand{\class}{Diseño y Análisis de Algoritmos} % This is the name of the course 
+\newcommand{\examnum}{Tarea 1} % This is the name of the assignment
+\newcommand{\examdate}{16/02/2023} % This is the due date
 \newcommand{\timelimit}{}
 
 
@@ -33,34 +33,93 @@
 
 \noindent
 \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
-\textbf{\class} & \textbf{Name:} & \textit{Your Name Here}\\ %Your name here instead, obviously 
+\textbf{\class} & \textbf{Name:} & \textit{Jaime Andres Torres Bermejo}\\ %Your name here instead, obviously 
 \textbf{\examnum} &&\\
 \textbf{\examdate} &&\\
 \end{tabular*}\\
 \rule[2ex]{\textwidth}{2pt}
 % ---
 
-
-
-
-\begin{enumerate} %You can make lists!
-
-\item This is the first item.
-
-\item This will make another item. % You can do this for each question.
-
-\item Yet another item. 
-
-\item Lists within lists! \begin{enumerate}
-\item ha-HA!
-\item see?
-
+\section*{Parte 1: Algoritmos a Analizar.}
+Para los siguientes problemas:
+\begin{enumerate}
+    \item Proponga un algoritmo que solucione el problema. (Python)
+    \item roponga una tabla que enumere las operaciones que se puede suponer que se ejecutan
+    en tiempo constante
+    \item Derive la función de costo, T(n), para el algoritmo que propuso, basado en las operaciones
+    constantes del punto anterior.
+    \item En caso de que la función sea una ecuación de recurrencia, resolver la ecuación.
+    \item Determinar el orden de complejidad del algoritmo.
 \end{enumerate}
+\subsection*{Dada una matriz cuadrada de números enteros sumar los elementos de la
+diagonal principal.}
+
+\subsubsection*{1. Código Fuente.}
+    \begin{verbatim}
+    def matrix_sum(nums):
+    i = len(nums)
+    j = 0
+    ret = 0
+    while j < i:
+        ret += nums[j][j]
+        j += 1
+    return ret
+    \end{verbatim}
+
+\subsubsection*{2. Tabla de costos}
+\begin{center}
+    \begin{tabular}{||c c||}
+        $C_1$ & Asignación de Variables \\
+        $C_2$ & Consultar 'len()' \\
+        $C_3$ & Sumar variable\\
+        $C_4$ & Comparación\\
+    \end{tabular}
+\end{center}
+
+\subsubsection*{3. Derivar la función de costo para el algoritmo propuesto.}
+$ T(n) = 3C_1 + C_2 + T(n(C_4+2C_1))$
+\subsubsection*{4. esta NO es una ecuación de recurrencia.}
+\subsubsection*{5. Determinar el orden de complejidad del algoritmo.}
+$$ 3C_1 + C_2 + T(n(C_4+2C_1))$$
+$$< \forall c \exists \mathbb{N} | cf = O(f) >$$
+$$ T(n) = O(n) $$ 
+
+El algoritmo es de complejidad O(n)
+
+\subsection*{Dada una matriz de números enteros y un numero entero, se debe devolver
+True si el numero se encuentra en la matriz y False en otro caso.}
+
+\subsubsection*{1. Código Fuente.}
+
+\begin{verbatim}
+    def matrix_search(nums, target):
+        for i in range(len(nums)):
+            for j in range(len(nums[0])):
+                if nums[i][j] == target:
+                    return True
+        return False
+\end{verbatim}
 
 
-\end{enumerate}
+\subsubsection*{2. Tabla de costos}
+\begin{center}
+    \begin{tabular}{||c c||}
+        $C_1$ & Consultar 'len()' \\
+        $C_2$ & Comparación\\
+    \end{tabular}
+\end{center}
 
-Look! Math! $f(x)=4x^2 - \frac{3}{4}x +1$ %use the dollar signs to go into math mode
+\subsubsection*{3. Derivar la función de costo para el algoritmo propuesto.}
+$$ T(n) = T(n(C_1)) + T(m(C_1+C_2)) $$
+\subsubsection*{4. esta NO es una ecuación de recurrencia.}
+\subsubsection*{5. Determinar el orden de complejidad del algoritmo.}
 
+$$ T(n(C_1)) + T(m(C_1+C_2)) $$
+$$< \forall c \exists \mathbb{N} | cf = O(f) >$$
+$$ T(n) = O(n) + O(m) $$
+$$ < Factorizacion > $$ 
+$$ T(n) = O(n+m) $$
 
+El algoritmo es de complejidad O(n+m), con n y m siendo ancho y largo de la
+matriz.
 \end{document}
