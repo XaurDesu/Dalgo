@@ -123,6 +123,17 @@ $$ T(n) = O(n+m) $$
 El algoritmo es de complejidad O(n+m), con n y m siendo ancho y largo de la
 matriz.
 
+\subsection*{Dada un arreglo de números enteros y un numero entero, se debe devolver
+True si el numero se encuentra en el arreglo y False en otro caso. Solución recursiva}
+\subsubsection*{1. Código Fuente.}
+\begin{verbatim}
+    def recursive_search(nums,target):
+    if nums[0] == target:
+        return True
+    elif len(nums) == 1:
+        return False
+    recursive_search(nums[1:], target)
+\end{verbatim}
 
 \section*{Parte 2: Soluciones de las siguientes ecuaciones de recurrencia.}
 determinar el orden de complejidad, para las ecuaciones no lineales debe:
@@ -158,6 +169,8 @@ T(n) = aT (n/4) + O(n2) ¿Cuál es el mayor valor entero de a para el que el alg
 profesor Marco sería asintóticamente más rápido que el algoritmo de Strassen?
 
 \subsection*{Solución}
+\subsubsection*{Algoritmo de Strassen.}
+
 
 \end{document}
 
