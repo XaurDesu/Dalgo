@@ -21,14 +21,15 @@ def matrix_search(nums, target):
                 return True
     return False
 
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
+def recursive_search(nums,target):
+    if nums[0] == target:
+        return True
+    elif len(nums) == 1:
+        return False
+    recursive_search(nums[1:], target)
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    print(recursive_search([1,2,3,4,5,6],0))
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
