@@ -122,4 +122,36 @@ $$ T(n) = O(n+m) $$
 
 El algoritmo es de complejidad O(n+m), con n y m siendo ancho y largo de la
 matriz.
+
+
+\section*{Parte 2: Soluciones de las siguientes ecuaciones de recurrencia.}
+determinar el orden de complejidad, para las ecuaciones no lineales debe:
+\begin{enumerate}
+    \item Proponer una cota usando arboles de recurrencia.
+    \item Demostrar la cota propuesta usando el método de sustitución.
+    \item De ser posible compruebe su respuesta usando el método maestro
+\end{enumerate}
+\subsection*{I.}
+$ 2T(n) - T(n-1), T(0)=1, T(1)=5 $
+\subsection*{Arbol de Recurrencia}
+\begin{verbatim}
+    2T(n) - T(n-1)
+    
+\end{verbatim}
+
+\section*{Problema de Strassen}
+
+El profesor Marco desea desarrollar un algoritmo de multiplicación de matrices
+que sea asintóticamente más rápido que el algoritmo de Strassen. Su algoritmo utilizará el
+método de dividir y conquistar, dividiendo cada matriz en trozos de tamaño n/4 x n/4, y los
+pasos de dividir y combinar juntos tardarán O(n2). Necesita determinar cuántos subproblemas
+tiene que crear su algoritmo para vencer al algoritmo de Strassen. Si su algoritmo crea
+un subproblema, entonces la recurrencia para el tiempo de ejecución T(n) se convierte en
+T(n) = aT (n/4) + O(n2) ¿Cuál es el mayor valor entero de a para el que el algoritmo del
+profesor Marco sería asintóticamente más rápido que el algoritmo de Strassen?
+
+\subsection*{Solución}
+
 \end{document}
+
+
