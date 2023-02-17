@@ -136,7 +136,14 @@ $ 2T(n) - T(n-1), T(0)=1, T(1)=5 $
 \subsection*{Arbol de Recurrencia}
 \begin{verbatim}
     2T(n) - T(n-1)
-    
+
+    .
+    `-- T(0) = 1
+        |-- T(1) = 5
+        `-- T(2) = 3
+            |-- T(2) = 3 
+            `-- T(3) = 4
+    --> O(n)
 \end{verbatim}
 
 \section*{Problema de Strassen}
