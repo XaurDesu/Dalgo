@@ -133,6 +133,7 @@ $$ T(n) = O(n) + O(m) $$
 $$ < Factorizacion > $$ 
 $$ T(n) = O(n+m) $$
 
+
 El algoritmo es de complejidad O(n+m), con n y m siendo ancho y largo de la
 matriz.
 
@@ -147,6 +148,31 @@ True si el numero se encuentra en el arreglo y False en otro caso. Solución rec
         return False
     recursive_search(nums[1:], target)
 \end{verbatim}
+
+\subsubsection*{2. Tabla de costos}
+\begin{center}
+    \begin{tabular}{||c c||}
+        $C_1$ & Consultar 'len()' \\
+        $C_2$ & Comparación\\
+    \end{tabular}
+\end{center}
+
+
+\subsubsection*{3. Derivar la función de costo para el algoritmo propuesto.}
+$$ T(n) = C_1*2C_2+(T(n-1)) $$
+
+\subsubsection*{4. Cotas.}
+$$ C_1*2C_2+(T(n-1)) $$
+
+\subsubsection*{5. Determinar el orden de complejidad del algoritmo.}
+$$ C_1*2C_2+(T(n-1)) $$
+$$ <\forall c \exists \mathbb{N} | cf = O(f)> $$
+$$ T(n) $$
+$$ O(n) $$
+
+La complejidad temporal es O(n), posiblemente podría hacerse logaritmica 
+usando búsqueda binaria, pero me dijeron que no era ese tipo de problema 
+en Discord.
 
 \section*{Parte 2: Soluciones de las siguientes ecuaciones de recurrencia.}
 determinar el orden de complejidad, para las ecuaciones no lineales debe:
@@ -170,7 +196,65 @@ $ 2T(n) - T(n-1), T(0)=1, T(1)=5 $
     --> O(n)
 \end{verbatim}
 
-\section*{Problema de Strassen}
+\subsection*{Metodo Maestro}
+No es de la forma del método maestro, por lo que no se aplica.
+
+\subsection*{II.}
+$$ 3T(n) - n, T(0)=1 $$
+
+Esta ecuación de recurrencia es \textbf{Inacotable bajo estos métodos.}
+
+$$ 3T(n) - n$$
+$$ <Base> $$
+$$ 3T(0) - 0 $$
+$$ <T(0) = 1>  $$
+$$ 3 - 0 $$
+$$ T(0) = 3 $$
+$$ <T(0) = 1>  $$
+$$ 1 = 3 $$
+$$ False $$
+
+Y esto, a su vez, implica un crecimiento que va a salirse de cualquier
+cota a la que queramos intentar igualarlo, porque la solución recursiva será
+mayor a la solución de una sola ejecución. Si diera esto un algoritmo, podríamos
+considerarlo bastante ineficiente, siendo sinceros.
+
+\subsection*{III.}
+$ 7T(\frac{n}{2}) -20n^2$
+
+
+\subsection*{Método maestro.}
+$$ 7T(\frac{n}{2}) -20n^2$$
+$$ <n^2 log n=Cota> $$
+$$ <f(n) = O(n \log_{b})> $$
+$$ O(n^{\log{2}^7} \log(n)) $$
+
+\subsection*{IV.}
+$$ \frac{n}{2} + 1 $$
+\subsection*{Arbol de Recurrencia}
+\begin{verbatim}
+    .
+    `-- T(n)
+        |-- T(n)/2
+        |   `-- 1
+        `-- T(n)/2
+            |-- T(n)/4
+            |   |-- T(n)/8
+            |   `-- 1
+            `-- 1
+\end{verbatim}
+\subsection*{Método maestro.}
+$$ \frac{n}{2} + 1 $$
+$$ <Aritmetica> $$
+$$ 1(\frac{n}{2}) + 1 $$
+
+\subsection*{V.}
+$$ 4T(\frac{n}{2}+2) + n $$
+
+\subsection*{Método maestro.}
+$$ 4T(\frac{n}{2}+2) + n $$
+$$  $$
+\section*{Parte 3: Problema de Strassen}
 
 El profesor Marco desea desarrollar un algoritmo de multiplicación de matrices
 que sea asintóticamente más rápido que el algoritmo de Strassen. Su algoritmo utilizará el
@@ -183,9 +267,27 @@ profesor Marco sería asintóticamente más rápido que el algoritmo de Strassen
 
 \subsection*{Solución}
 \subsubsection*{Algoritmo de Strassen.}
-La complejidad del algoritmo de Strassen esta definida como $ \log _{10} 3 $ \cite[CENK2017484]{keylist}
+La complejidad del algoritmo de Strassen esta definida como $ O(n\log_{2}7)+O(n^2) $ dentro de la
+literatura [1]. y dado que la complejidad de el algoritmo de Marco tiene una complejidad
+de $ T(n) = aT \frac{n}{4} + O(n^2) $, entonces:
+$$ aT \frac{n}{4} + O(n^2) < T(n\log_{2}7) + O(n^2)$$
+$$ <Metodo Maestro> $$
+$$ T(n^{\log_{4}a}) + O(n^2) < T(n^{\log_{2}7}) + O(n^2)$$
+$$ <Aritmetica> $$
+$$ T(n^{\log_{4}a}) < T(n^{\log_{2}7})$$
+$$ <Propiedades Logaritmos> $$
+$$ \log_{4}a < \log_{2}7$$
+$$ <Aritmetica> $$
+$$ a < 49$$
+
+Por lo tanto, $a = 48$ es el último número entero que puede mantener la desigualdad.
 
 
+
+\section*{Referencias}
+[1]. On the arithmetic complexity of Strassen-like matrix multiplications, 
+Journal of Symbolic Computation, Murat Cenk and M. Anwar Hasan ,2017
+Vol. 80, p. 484-501. 
 \end{document}
 
 @article{CENK2017484,
