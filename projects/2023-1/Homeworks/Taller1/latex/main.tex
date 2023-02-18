@@ -163,6 +163,17 @@ $$ T(n) = C_1*2C_2+(T(n-1)) $$
 
 \subsubsection*{4. Cotas.}
 $$ C_1*2C_2+(T(n-1)) $$
+\begin{verbatim}
+.
+`-- C_1*2C_2+(T(n-1))/
+    |-- C
+    `-- T(n-2)/
+        |-- C
+        `-- T(n-3)/
+            |-- C
+            `-- T(n-4)
+    --> O(n)
+\end{verbatim}
 
 \subsubsection*{5. Determinar el orden de complejidad del algoritmo.}
 $$ C_1*2C_2+(T(n-1)) $$
@@ -222,16 +233,28 @@ considerarlo bastante ineficiente, siendo sinceros.
 \subsection*{III.}
 $ 7T(\frac{n}{2}) -20n^2$
 
+\subsubsection*{Arbol de Recurrencia}
+\begin{verbatim}
+.
+`-- 7T(n/2)-20n^2/
+    |-- 7T(n/4)/
+    |   |-- 7T(n/8)/
+    |   |   |-- 7T(n/16)
+    |   |   `-- 20n^2  
+    |   `-- 20n^2
+    `-- 20n^2
+--> log(n^y)
+\end{verbatim}
 
-\subsection*{Método maestro.}
+\subsubsection*{Método maestro.}
 $$ 7T(\frac{n}{2}) -20n^2$$
 $$ <n^2 log n=Cota> $$
 $$ <f(n) = O(n \log_{b})> $$
-$$ O(n^{\log{2}^7} \log(n)) $$
+$$ O(n^{\log{2}^7}) $$
 
 \subsection*{IV.}
-$$ \frac{n}{2} + 1 $$
-\subsection*{Arbol de Recurrencia}
+$$ T(\frac{n}{2}) + 1 $$
+\subsubsection*{Arbol de Recurrencia}
 \begin{verbatim}
     .
     `-- T(n)
@@ -242,18 +265,27 @@ $$ \frac{n}{2} + 1 $$
             |   |-- T(n)/8
             |   `-- 1
             `-- 1
+    --> O(log(n))
 \end{verbatim}
-\subsection*{Método maestro.}
+\subsubsection*{Método maestro.}
 $$ \frac{n}{2} + 1 $$
 $$ <Aritmetica> $$
-$$ 1(\frac{n}{2}) + 1 $$
+$$ 1(\frac{n}{2}) + 1*n^0 $$
+$$ n^{\log_{2}1} $$
+$$ O(n^{\log_{2}1})$$
+Complejidad $ O(n^{\log_{2}1})$
 
 \subsection*{V.}
 $$ 4T(\frac{n}{2}+2) + n $$
 
-\subsection*{Método maestro.}
+
+
+\subsubsection*{Método maestro.}
 $$ 4T(\frac{n}{2}+2) + n $$
-$$  $$
+$$ n^{\log_{2}4} + n$$
+$$ O(n^{2}) $$
+Complejidad $O(n^2)$
+
 \section*{Parte 3: Problema de Strassen}
 
 El profesor Marco desea desarrollar un algoritmo de multiplicación de matrices
