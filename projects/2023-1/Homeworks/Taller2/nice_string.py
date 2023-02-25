@@ -1,6 +1,11 @@
+from collections import Counter
+
 def check_string(string:str):
+    ret = True
+    count = Counter(string)
     
-    pass
+    return (ret, string)
+    
 def nice_string(string:str)->str:
     nicest = ""
 
