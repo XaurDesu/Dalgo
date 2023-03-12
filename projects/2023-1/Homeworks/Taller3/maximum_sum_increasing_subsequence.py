@@ -25,13 +25,33 @@ def lis(array):
     #return the max longest increasing subsequence
     return max(LIS,default=0)
 
-SACADO DE LAS DIAPOSITIVAS
+SACADO DE LAS DIAPOSITIVAS, ESTA SOLUCION ES UNA ADAPTACIÓN DE ESTA
+VERSION DE LIS
 """
+from itertools import combinations
+
+
+def get_subsequences(s):
+    out = set()
+    for i in range(1, len(s) + 1):
+        for c in combinations(s, i):
+            out.add(''.join(c))
+    return sorted(out)
+
+def get_LIS(s):
+    l = len(s)
+    for i in range(1, l):
+        subproblems = []
+        for k in range(i):
+            subproblems.append(sum(nums[k:i]))
+    return max(subproblems, default=0)
 
 def maximum_sum_increasing_subsequence(nums):
-    max_sum = 0
-    ret = []
+    nums_subsequences = get_subsequences(nums)
+    l = len(nums_subsequences)
+    LIS = [0] * l
 
-    
+    for i in range(l):
+        LIS[i] = get_LIS(nums_subsequences[i])
 
-    return ret
+    return max(LIS, default=0)

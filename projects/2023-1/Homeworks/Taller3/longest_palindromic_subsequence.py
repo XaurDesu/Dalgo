@@ -9,5 +9,5 @@ def get_subsequences(s):
     return sorted(out, reverse=True, key=len)
 
 def longest_palindromic_subsequence(s: str) -> int:
-    strings = get_subsequences(s)    
+    strings = get_subsequences(s)
     return len(strings[0])
