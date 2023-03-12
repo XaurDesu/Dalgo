@@ -31,27 +31,28 @@ VERSION DE LIS
 from itertools import combinations
 
 
+
+def is_increasing(array):
+    if len(array) == 1:
+        return True
+    for i in range(1,len(array)):
+        if array[i] <= array[i-1]:
+            return False
+    return True
+
 def get_subsequences(s):
     out = set()
     for i in range(1, len(s) + 1):
         for c in combinations(s, i):
-            out.add(''.join(c))
+            if is_increasing(c):
+                out.add(c)
     return sorted(out)
-
-def get_LIS(s):
-    l = len(s)
-    for i in range(1, l):
-        subproblems = []
-        for k in range(i):
-            subproblems.append(sum(s[k:i]))
-    return max(subproblems, default=0)
 
 def maximum_sum_increasing_subsequence(nums):
     nums_subsequences = get_subsequences(nums)
     l = len(nums_subsequences)
     LIS = [0] * l
-
     for i in range(l):
-        LIS[i] = get_LIS(nums_subsequences[i])
+        LIS[i] = sum(nums_subsequences[i])
 
     return max(LIS, default=0)
