@@ -43,7 +43,7 @@ def get_LIS(s):
     for i in range(1, l):
         subproblems = []
         for k in range(i):
-            subproblems.append(sum(nums[k:i]))
+            subproblems.append(sum(s[k:i]))
     return max(subproblems, default=0)
 
 def maximum_sum_increasing_subsequence(nums):
