@@ -14,7 +14,7 @@ class solution:
                     if n == j:
                         return True
                     if not visited[n]:
-                        queue.append(n)No adicionaste las invocaciones a p() y v() sobre los semáforos - eso era lo que la pregunta pedía
+                        queue.append(n)
         return False
 
     def BFS_shortest_path(self, AdjList: dict, Node1: int, Node2: int) -> List[int]:
@@ -27,8 +27,8 @@ class solution:
         visited = self.make_visited(AdjList)
         ret = []
         queue = [Node1]
-        
-        pass
+        while 0 < len(queue):
+            pass
 
     def make_visited(self, l_adj):
         ret = {}
