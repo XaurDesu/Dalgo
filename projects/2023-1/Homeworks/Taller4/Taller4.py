@@ -3,40 +3,77 @@ class solution:
     # {1:[2,3,4], 2:[1], 3:[1,4], 4:[3,1]}
     # Todos los grafos son grafos no dirigidos!
     # Los nombres de los nodos son numeros naturales!
-    def BFS_connect(AdjList: dict, Node1: int, Node2: int) -> bool:
-        """
-        Dados dos nodos del grafo, retorne True si están conectados, False en otro caso  
-        """
-        pass
+    def BFS_connect(self, Adj: dict, s: int, j: int) -> bool:
+        visited = self.make_visited(Adj)
+        queue = [s]
+        while 0 < len(queue): 
+            current_node = queue.pop(0)
+            if not visited[current_node]:
+                visited[current_node] = True
+                for n in Adj[current_node]:
+                    if n == j:
+                        return True
+                    if not visited[n]:
+                        queue.append(n)
+        return False
+
     def BFS_shortest_path(AdjList: dict, Node1: int, Node2: int) -> List[int]:
         """
         Dados dos nodos del grafo, retorne el camino de menor longitud.
         El camino de menor longitud debe ser un lista de los nodos por los cuales
         se debe pasar para llegar del Nodo1 al Nodo2, incluyéndolos. Si los nodos
         no están conectados se debe devolver una lista vacía.  
-        """
+        """ 
         pass
+
+    def make_visited(self, l_adj):
+        ret = {}
+        for v in l_adj.keys():
+            ret[v] = False
+        return ret
+
+    def create_l_adj(self, image, prev_color):
+        l_adj = {}
+
+        for i in range(len(image)):
+            for j in range(len(image[0])):
+                if image[i][j] == prev_color:
+                    l_adj[(i, j)] = [
+                            (i+1, j),
+                    (i, j-1),       (i,j+1),
+                            (i-1, j)
+                    ]
+        return l_adj
+    
+    def bfs_flood_fill(self, image, l_adj, sr, sc, color, prev_color):
+        visited = self.make_visited(l_adj)
+        queue = [(sr, sc)]
+        while 0 < len(queue):
+            current_node = queue.pop(0)
+            if current_node[0] >= len(image) and current_node[1] >= len(image[0]):
+                visited[current_node] = True
+            if not visited[current_node]:
+                visited[current_node] = True
+                image[current_node[0]][current_node[1]] = color
+                for n in l_adj[current_node]:
+                    if n in visited and not visited[n]:
+                        queue.append(n)
+        return image
+
     def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
-        """
-        An image is represented by an m x n integer grid image where image[i][j] 
-        represents the pixel value of the image.
-
-        You are also given three integers sr, sc, and color. You should perform 
-        a flood fill on the image starting from the pixel image[sr][sc].
-
-        To perform a flood fill, consider the starting pixel, plus any pixels 
-        connected 4-directionally to the starting pixel of the same color as 
-        the starting pixel, plus any pixels connected 4-directionally 
-        to those pixels (also with the same color), and so on. 
-        Replace the color of all of the aforementioned pixels with color.
-
-        https://leetcode.com/problems/flood-fill/
-        """
+        prev_color = image[sr][sc]
+        l_adj = self.create_l_adj(image, prev_color)
+        image = self.bfs_flood_fill(image, l_adj, sr, sc, color, prev_color)
+        return image
+    
+    
     def DFS_isTree(AdjList:dict) -> bool:
         """
         Escriba un algoritmos basados en DFS tal que dado un grafo retorne 
         True sii el grafo es un arbol, en otro caso False.
         """
+        
+        pass
     def Diskjstra_shortest_path(AdjListWeigted, Node1:int, Node2:int) -> List[int]:
         """
         Escriba un algoritmo que implemente el algoritmo de Dikjstra para calcular
