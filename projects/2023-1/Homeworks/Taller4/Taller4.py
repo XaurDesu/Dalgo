@@ -17,13 +17,17 @@ class solution:
                         queue.append(n)
         return False
 
-    def BFS_shortest_path(AdjList: dict, Node1: int, Node2: int) -> List[int]:
+    def BFS_shortest_path(self, AdjList: dict, Node1: int, Node2: int) -> List[int]:
         """
         Dados dos nodos del grafo, retorne el camino de menor longitud.
         El camino de menor longitud debe ser un lista de los nodos por los cuales
         se debe pasar para llegar del Nodo1 al Nodo2, incluyéndolos. Si los nodos
         no están conectados se debe devolver una lista vacía.  
         """ 
+        visited = self.make_visited(AdjList)
+        ret = []
+        queue = [Node1]
+        
         pass
 
     def make_visited(self, l_adj):
@@ -72,7 +76,7 @@ class solution:
         Escriba un algoritmos basados en DFS tal que dado un grafo retorne 
         True sii el grafo es un arbol, en otro caso False.
         """
-        
+
         pass
     def Diskjstra_shortest_path(AdjListWeigted, Node1:int, Node2:int) -> List[int]:
         """
