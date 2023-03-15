@@ -14,7 +14,7 @@ class solution:
                     if n == j:
                         return True
                     if not visited[n]:
-                        queue.append(n)
+                        queue.append(n)No adicionaste las invocaciones a p() y v() sobre los semáforos - eso era lo que la pregunta pedía
         return False
 
     def BFS_shortest_path(self, AdjList: dict, Node1: int, Node2: int) -> List[int]:
@@ -89,6 +89,16 @@ class solution:
 
         Args:
             AdjListWeigted (?): En este caso son libres de escoger la implementación que deseen
-            en cualquier caso incluyan comentarios que permitan hacer pruebas del metodo. 
+            en cualquier caso incluyan comentarios que permitan hacer pruebas del metodo.
+            
+        -- IMPLEMENTACIÓN ADJ_LIST WEIGHTED --
+
+        La lista Adyacente pesada se implementa de la siguiente forma
+
+        list = {"Ejemplo": [["a", 14], ["b",21]]}
+        es un diccionario donde la llave es una matriz 2xn, donde el valor "0" es el nodo al que lleva y 
+        el valor "1" es el peso de la conexión. se asume que el valor "1" siempre será un número.
         ...
         """
+
+        
