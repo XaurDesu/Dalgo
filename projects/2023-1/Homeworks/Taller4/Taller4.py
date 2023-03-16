@@ -1,3 +1,4 @@
+from ast import List
 import math
 class solution:
     # Salvo el ultimo metodo AdjList es un diccionario con la siguiente estructura
@@ -18,8 +19,13 @@ class solution:
                         queue.append(n)
         return False
 
-    def get_that_list(self,parent, Node1, Node2):
+    def get_that_list(self,parent, Node2):
         ret = []
+        var = Node2
+        while var != None:
+            ret.append(var)
+            var = parent[var]
+        ret = ret[::-1]
         return ret
 
     def BFS_shortest_path(self, AdjList: dict, Node1: int, Node2: int) -> List[int]:
@@ -42,7 +48,7 @@ class solution:
             if not visited[current_node]:
                 parent[current_node] = previous_node
                 if current_node == Node2:
-                    return self.get_that_list(parent, Node2, Node1)
+                    return self.get_that_list(parent, Node2)
                 visited[current_node] = True
                 
                 for n in AdjList[current_node]:
