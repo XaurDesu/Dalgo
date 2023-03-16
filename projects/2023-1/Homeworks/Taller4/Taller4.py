@@ -1,3 +1,4 @@
+import math
 class solution:
     # Salvo el ultimo metodo AdjList es un diccionario con la siguiente estructura
     # {1:[2,3,4], 2:[1], 3:[1,4], 4:[3,1]}
@@ -17,6 +18,10 @@ class solution:
                         queue.append(n)
         return False
 
+    def get_that_list(self,parent, Node1, Node2):
+        ret = []
+        return ret
+
     def BFS_shortest_path(self, AdjList: dict, Node1: int, Node2: int) -> List[int]:
         """
         Dados dos nodos del grafo, retorne el camino de menor longitud.
@@ -25,10 +30,26 @@ class solution:
         no están conectados se debe devolver una lista vacía.  
         """ 
         visited = self.make_visited(AdjList)
-        ret = []
+        parent = {}
+        for v in AdjList.keys():
+            parent[v] = None
+        
+        previous_node = None
         queue = [Node1]
         while 0 < len(queue):
-            pass
+            previous_node = current_node
+            current_node = queue.pop(0)
+            if not visited[current_node]:
+                parent[current_node] = previous_node
+                if current_node == Node2:
+                    return self.get_that_list(parent, Node2, Node1)
+                visited[current_node] = True
+                
+                for n in AdjList[current_node]:
+                    if not visited[n]:
+                        queue.append(n)
+        return []
+
 
     def make_visited(self, l_adj):
         ret = {}
@@ -70,14 +91,32 @@ class solution:
         image = self.bfs_flood_fill(image, l_adj, sr, sc, color, prev_color)
         return image
     
-    
-    def DFS_isTree(AdjList:dict) -> bool:
+
+    def dfs_algo(self, s, visited, AdjList):
+        if visited[s] == True:
+            return False
+        visited[s] = True	
+        for n in AdjList[s]:
+            if not visited[n]:
+                if self.dfs_algo(n, visited, AdjList) == False:
+                    return False
+                continue
+            else:
+                return False
+        return True
+
+    def DFS_isTree(self, AdjList:dict) -> bool:
         """
         Escriba un algoritmos basados en DFS tal que dado un grafo retorne 
-        True sii el grafo es un arbol, en otro caso False.
+        True si el grafo es un arbol, en otro caso False.
         """
+        visited = self.make_visited(AdjList)
+        has_cycle = self.dfs_algo(next(iter(AdjList)),visited, AdjList)
+        if False not in set(visited.values()) and has_cycle:
+            return True
+        else:
+            return False
 
-        pass
     def Diskjstra_shortest_path(AdjListWeigted, Node1:int, Node2:int) -> List[int]:
         """
         Escriba un algoritmo que implemente el algoritmo de Dikjstra para calcular
@@ -100,5 +139,8 @@ class solution:
         el valor "1" es el peso de la conexión. se asume que el valor "1" siempre será un número.
         ...
         """
+        dist = []
+        for i in len():
+            pass
 
         
