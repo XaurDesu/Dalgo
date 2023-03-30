@@ -40,12 +40,14 @@ beneficiarios y sus familias según cercanía y disponibilidad. Para que las fin
 no se vean afectadas por una mala distribución de beneficiarios y para garantizar el mejor servicio,
 es necesario diseñar una estrategia de asignación equitativa de beneficiarios.
 
-\paragraph{Problema}
+\paragraph{Problema:}
 Suponga que para un atender la demanda de salud en un determinado municipio de Colombia se
 habilitaran \textit{k} diferentes CADs a los cuales se deberán asignar \textit{m} familias diferentes. La familia i-
 esima cuenta con \textit{$f_i$} miembros diferentes. Se le encarga la tarea de identificar si existe una manera
 en que todos los CAD puedan quedar con la misma cantidad de beneficiarios, con la restricción que
-TODOS los miembros de un mismo grupo familiar sean asignados a un mismo CAD.
+TODOS los miembros de un mismo grupo familiar sean asignados a un mismo CAD. [1]
+
+%------------------------------------------------
 \section{Especificaciones del proyecto}
 
 \subsection{Entorno de Desarrollo y entorno de prueba.}
@@ -68,7 +70,7 @@ por lo que recomiendo intentar correrlo en un entorno relativamente similar.
     de Git y Python.
 \end{itemize}
 
-\subsection{Estructura del Input}
+\subsection{Estructura del Input y Output}
 A primera vista, este pareciese ser un problema bastante extraño, si fuesemos a tomarlo por la lógica
 del propio problema sin necesariamente cuestionarla. Sin embargo, esta estructura puede verse de forma mucho
 más clara al ver la forma como un input esta estructurado, y a partir de esto, comprobar la
@@ -80,17 +82,79 @@ enunciado:
     2 3 4 7 9 
     2 4 5 7 8 4
 \end{verbatim}
-
-%------------------------------------------------
-
+Y de este input, tendríamos este output:
+\begin{verbatim}
+    True [(8,3),(7,4),(11)]
+    False
+    True [(5,7)(8,4)]
+\end{verbatim}
+Para entender el porque de este output, vamos a tomar el primer input de este
+set de inputs:
+\begin{verbatim}
+    3 5 8 7 3 4 11
+    True [(8,3),(7,4),(11)]
+\end{verbatim}
+La primera cosa a notar es que este input no tiene toda la lista que se pasa por
+parámetro. Los dos primeros numeros de la lista se obvian porque \textbf{No representan
+familias, sino otras variables que nos serán relevantes.} Especificamente, el primer valor
+representa las \textit{k} instancias de CAD, que serán listas, y el segundo valor representa
+las \textit{i} familias que existen dentro del sistema, cuyo numero de miembros es
+el int que representan. Por lo tanto, el input se vería, una vez formateado, así:
 \begin{align*}
-y &=  \sum\limits_{i,k} m_i \cdot f^k \\
-x &=  
-\underset{11}{\underbrace{3 + 8}} + 5 + 7
+    Input = \begin{cases}
+        i = 5 \\
+        k = 3 \\
+        nums = [8, 7, 3, 4, 11]
+    \end{cases}
 \end{align*}
+notese que \textit{i} coincide con la longitud de \textit{nums}, y \textit{k} coincide
+con la cantidad de listas generadas en el output. Esto no es una coincidencia, y será muy
+importante cuando hablemos del diseño de la solución, pero por ahora, limitemonos a pensar
+en que esto cambia la forma en la que pensamos del concepto de CADS y familias, a listas Y
+enteros, entonces cuando pensamos el problema, no nos centramos en el enunciado, sino en su 
+abstracción, \textbf{si encontramos las \textit{k} tuplas de los valores de nums con suma igual,
+resolveremos el problema.}
 
+Para corroborar esto, vamos a tomar la lista del output y vamos a ordenarla
+\begin{align*}
+    output[1] &= [(8,3), (7,4), (11)] \\
+    <suma (Aritmetica)> \\
+    output[1] &= [\underset{11}{\underbrace{[3 + 8]}},
+    \underset{11}{\underbrace{[7 + 4]}},
+    \underset{11}{\underbrace{[11]}}]
+\end{align*} 
+
+Como es posible tomar la lista \textit{nums} y ponerla en \textit{k} tuplas de
+sumas exactamente iguales, entonces el resultado es True, si no fuese posible, simplemente
+se retornaría False, la estructura dinámica de Python y sus retornos nos permitirá hacer
+de forma bastante sencilla la solución, pero nos estamos adelantando.
+
+\subsection{Lectura de datos}
+Según se nos fue informado por los monitores, la lectura se hará a partir de la lectura
+de archivos de texto y, por lo tanto, la estructura del archivo de Python esta pensada para
+poder leer varios archivos de texto secuencialmente.
 %------------------------------------------------
+\section{Diseño de la Solución}
+\subsection{Conceptos Teóricos Importantes}
+\subsubsection{Programación Dinámica}
 
+\subsubsection{Memorización}
+La Memorización se define cómo: 'a'[2]
+
+\subsection{Conceptos Prácticos Importantes}
+\subsubsection{Tipado dinámico}
+
+\subsubsection{Return vacío}
 %------------------------------------------------
-
+\section{Análisis de la Solución}
+\subsection{Complejidad}
+\subsection{Limitantes}
+\subsection{Consideraciones}
+%------------------------------------------------
+\section{Referencias.}
+\begin{itemize}
+    \item [1]: \textit{Enunciado del proyecto, ISIS 1105 Diseño y Análisis de Algoritmos
+    Semestre 2023-10. Proyecto – PARTE 1} Uniandes, 2023.
+    \item [2]: \textit{The Algorithm Design Manual, Springer}, Steven S. Skiena, .
+\end{itemize}
 \end{document}

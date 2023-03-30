@@ -16,14 +16,14 @@ def abrir_archivo(file: str) -> list:
 
 
 
-def beneficiarios(nums: list[int]) -> None:
+def beneficiarios(k:int, i: int, nums: list[int]) -> None:
 
     #Formateo de salida.
     print("- - - - - - - - - - - - - - - - - - - - -")
     print("CASO A EVALUAR: ", nums)
-    if len(nums) == 0:
-        print(False," ",[])
-        return
+    print("k =",k)
+    print("i =",i)
+    
     is_possible = False
 
     if is_possible:
@@ -45,7 +45,7 @@ def main():
             cases = abrir_archivo(ARCHIVOS_PRUEBA+"/"+entry.name)
             for i in cases:
                 case = [int(j) for j in i]
-                beneficiarios(case)
+                beneficiarios(case[0],case[1],case[2:])
 
 if __name__ == "__main__":
     main()
