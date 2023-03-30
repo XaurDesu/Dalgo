@@ -46,24 +46,48 @@ habilitaran \textit{k} diferentes CADs a los cuales se deberán asignar \textit{
 esima cuenta con \textit{$f_i$} miembros diferentes. Se le encarga la tarea de identificar si existe una manera
 en que todos los CAD puedan quedar con la misma cantidad de beneficiarios, con la restricción que
 TODOS los miembros de un mismo grupo familiar sean asignados a un mismo CAD.
+\section{Especificaciones del proyecto}
 
+\subsection{Entorno de Desarrollo y entorno de prueba.}
+
+La solución propuesta fue probada en el siguiente entorno de Desarrollo, debería funcionar en
+computadores que compartan las dependencias principales, como Python o un sistema operativo basado
+en Unix, así no comparta necesariamente el hardware. No se proporciona un entorno de virtualización
+por lo que recomiendo intentar correrlo en un entorno relativamente similar.
+
+\begin{itemize}
+    \item \textbf{Sistema Operativo: } Ubuntu 22.10 x86\_64, Minimal Install.
+    \item \textbf{Kernel: }Linux 5.19.0-38-generic
+    \item \textbf{Lenguaje de Programación: }Python 3.10.7 x86\_64, Compilado desde apt como un .deb, incluye python3-pip
+    \item \textbf{Librerías Utilizadas}
+    \begin{itemize}
+        \item os
+    \end{itemize}
+    \item \textbf{Procesador: }AMD Ryzen 5 3550H with Radeon Vega Mobile Gfx (8) @ 2.100GHz 
+    \item \textbf{IDE: } Visual Studio Code 1.76.2, instalado desde un paquete snapd. Incluye extensiones
+    de Git y Python.
+\end{itemize}
+
+\subsection{Estructura del Input}
+A primera vista, este pareciese ser un problema bastante extraño, si fuesemos a tomarlo por la lógica
+del propio problema sin necesariamente cuestionarla. Sin embargo, esta estructura puede verse de forma mucho
+más clara al ver la forma como un input esta estructurado, y a partir de esto, comprobar la
+utilidad de cada parte del input. Entonces, tomemos como ejemplo el segundo test proveido por el
+enunciado:
+\begin{verbatim}
+    3 
+    3 5 8 7 3 4 11
+    2 3 4 7 9 
+    2 4 5 7 8 4
+\end{verbatim}
 
 %------------------------------------------------
 
-\section{First Exercise}
-\blindtext
-\subsection{First Subtask}
-Some equations
 \begin{align*}
 y &=  \sum\limits_{i,k} m_i \cdot f^k \\
 x &=  
 \underset{11}{\underbrace{3 + 8}} + 5 + 7
 \end{align*}
-
-\subsection{Second Subtask}
-\blindtext
-
-\bigskip
 
 %------------------------------------------------
 
