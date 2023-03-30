@@ -14,7 +14,7 @@ def abrir_archivo(file: str) -> list:
         ret.append(i)
     return ret[1:]
 
-
+soluciones = {}
 
 def beneficiarios(k:int, i: int, nums: list[int]) -> None:
 
@@ -25,15 +25,12 @@ def beneficiarios(k:int, i: int, nums: list[int]) -> None:
     print("i =",i)
     
     is_possible = False
+    subs = []
+    for position in range(k):
+        subs.append([0]*i)
 
-    if is_possible:
-        #TODO
-        #poner el print de las listas
-        return(True," ",)
-        pass
-    else:
-        print(False)
-        return
+    print(subs)
+
 
 
 def main():
