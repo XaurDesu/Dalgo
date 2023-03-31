@@ -1,0 +1,69 @@
+\documentclass[a4paper]{article} 
+\input{head}
+\begin{document}
+
+%-------------------------------
+%	TITLE SECTION
+%-------------------------------
+
+\fancyhead[C]{}
+\hrule \medskip % Upper rule
+\begin{minipage}{0.295\textwidth} 
+\raggedright
+\footnotesize
+Jaime Andres Torres Bermejo \hfill\\   
+202014866\hfill\\
+andrestbermejoj@gmail.com
+\end{minipage}
+\begin{minipage}{0.4\textwidth} 
+\centering 
+\large 
+Taller 5\\ 
+\normalsize 
+Diseño y Análisis de Algoritmos\\ 
+\end{minipage}
+\begin{minipage}{0.295\textwidth} 
+\raggedleft
+\today\hfill\\
+\end{minipage}
+\medskip\hrule 
+\bigskip
+
+%-------------------------------
+%	CONTENIDO
+%-------------------------------
+\section{Explique y justifique que pasa cuando el algoritmo de Dijkstra recibe un grafo con
+un ciclo negativo.}
+
+El algoritmo de Dijkstra nos permite buscar el camino de menor longitud entre 2 nodos de un grafo,
+y un ciclo negativo es un ciclo en el cuál los valores de todos los vertices del ciclo
+den una suma total negativa. El algoritmo de Dijkstra es un algoritmo sin uso de 
+recursividad o Programación dinámica en la mayoría de sus implementaciones, en su lugar utilizando
+una estrategia Greedy para resolver el problema, esta estrategia implica que el algoritmo
+seleccionará la solución localmente óptima a la hora de ejecutarse. Al introducirse un ciclo negativo
+en un algoritmo de este tipo, que inherentemente esta solamente preocupado por entregar una solución
+inmediatamente menor, puede causar situaciones de este tipo:
+    
+\begin{verbatim}
+      A
+     / \
+    /   \
+   /     \
+  5       2
+ /         \
+B--(-800)--  C
+
+V={A,B,C} ; E = {(A,C,2), (A,B,5), (B,C,-800)}
+\end{verbatim}
+
+En este caso tenemos un ciclo negativo y podemos asumir que esta conectado a mas partes
+del grafo,  Si quisieramos encontrar un camino de un nodo a otro, sería 
+posible que dado lo negativa que es la conexión de B a C, un valor previamente calculado
+que pasara por estos vertices no se pudiese recalcular dada la naturaleza miope
+del algoritmo, lo cuál causaria que el resultado de el arbol que retorna un grafo con este
+ciclo fuese incorrecto. Algoritmos de grafos dinámicos podrían hacer esta recalculación,
+por lo que el algoritmo podría funcionar, en general, Dijkstra no sirve en grafos con
+vértices negativos por esta razón.
+
+
+\end{document}
