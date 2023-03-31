@@ -16,6 +16,16 @@ def abrir_archivo(file: str) -> list:
 
 soluciones = {}
 
+def solve(i: int, nums: list, subs: list[int]):
+    if i >= len(nums):
+        is_same = set([sum(i) for i in subs])
+        if len(is_same) != 1:
+            return False
+        else:
+            return(True, [tuple(i) for i in subs])
+    else:
+        pass
+    
 def beneficiarios(k:int, i: int, nums: list[int]) -> None:
 
     #Formateo de salida.
@@ -28,6 +38,8 @@ def beneficiarios(k:int, i: int, nums: list[int]) -> None:
     subs = []
     for position in range(k):
         subs.append([0]*i)
+    
+    
 
     print(subs)
 
