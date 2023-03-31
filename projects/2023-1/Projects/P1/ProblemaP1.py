@@ -49,7 +49,6 @@ def beneficiarios(k:int, i: int, nums: list[int]) -> None:
     print(subs)
 
 
-
 def main():
     tests = list(os.scandir(ARCHIVOS_PRUEBA))
     for entry in tests :

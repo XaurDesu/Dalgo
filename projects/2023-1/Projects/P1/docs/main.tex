@@ -58,16 +58,17 @@ en Unix, así no comparta necesariamente el hardware. No se proporciona un entor
 por lo que recomiendo intentar correrlo en un entorno relativamente similar.
 
 \begin{itemize}
-    \item \textbf{Sistema Operativo: } Ubuntu 22.10 x86\_64, Minimal Install.
+    \item \textbf{Sistema Operativo: } Ubuntu 22.10 x86\_64, Minimal Install. También probado con Manjaro Linux 22.0 x86\_64
     \item \textbf{Kernel: }Linux 5.19.0-38-generic
-    \item \textbf{Lenguaje de Programación: }Python 3.10.7 x86\_64, Compilado desde apt como un .deb, incluye python3-pip
+    \item \textbf{Lenguaje de Programación: }Python 3.10.7 x86\_64, Compilado desde apt como un .deb, incluye python3-pip,
+        También probado con la versión de Arch 
     \item \textbf{Librerías Utilizadas}
     \begin{itemize}
         \item os
     \end{itemize}
     \item \textbf{Procesador: }AMD Ryzen 5 3550H with Radeon Vega Mobile Gfx (8) @ 2.100GHz 
     \item \textbf{IDE: } Visual Studio Code 1.76.2, instalado desde un paquete snapd. Incluye extensiones
-    de Git y Python.
+    de Git y Python. En Manjaro fue instalado desde el AUR con el paquete visual-studio-code-bin
 \end{itemize}
 
 \subsection{Estructura del Input y Output}
@@ -132,7 +133,8 @@ de forma bastante sencilla la solución, pero nos estamos adelantando.
 \subsection{Lectura de datos}
 Según se nos fue informado por los monitores, la lectura se hará a partir de la lectura
 de archivos de texto y, por lo tanto, la estructura del archivo de Python esta pensada para
-poder leer varios archivos de texto secuencialmente.
+poder leer varios archivos de texto secuencialmente. Para esto hemos importado la librería 'os'
+de las librerías base de Python, con esta y el 
 %------------------------------------------------
 \section{Diseño de la Solución}
 \subsection{Conceptos Teóricos Importantes}
@@ -143,18 +145,111 @@ La Memorización se define cómo: 'a'[2]
 
 \subsection{Conceptos Prácticos Importantes}
 \subsubsection{Tipado dinámico}
+El lenguaje de Programación utilizado para resolver este algoritmo fue Python,
+el cuál tiene la capacidad de mantener una estructura de tipado dinámica, esta
+implica que podemos declarar una variable de un tipo y esta podrá ser interpretada
+como de otro tipo a la hora de compilar el código, otros lenguajes de Programación
+con esta caráccteristica son Ruby y Javascript
 
 \subsubsection{Return vacío}
+Python nos permite hacer un return nulo, esto puede ser utilizado para imprimir el
+resultado de una operacion sin necesidad de preocuparnos por el retorno de este en un
+entorno recursivo.
+
 %------------------------------------------------
 \section{Análisis de la Solución}
+\subsection{Problemas similares}
+\subsubsection{Leetcode 416. Partition Equal Subset Sum}
+El problema de este proyecto esta pensado como, en realidad, una generalización
+del problema 416 de Leetcode, Partition Equal Subset Sum[3], el cual se lee de la siguiente manera:
+
+\begin{verbatim}
+    Given an integer array nums, return true if you can partition the array
+    into two subsets such that the sum of the elements in both subsets is 
+    equal or false otherwise.
+
+    //Example 1
+    Input: nums = [1,5,11,5]
+    Output: true
+    Explanation: The array can be partitioned as [1, 5, 5] and [11].
+
+    //Example 2
+    Input: nums = [1,2,3,5]
+    Output: false
+    Explanation: The array cannot be partitioned into equal sum subsets.
+\end{verbatim} 
+
+El problema resuelto en este Proyecto puede considerarse como una generalización en
+K subarreglos de este problema, y por eso mismo nos concierne la estructura de esta 
+solución para poder entender la forma como se pudo generalizar de 2 subarreglos a \textit{k}
+subarreglos.
+
+\paragraph{Estrategia de solución}
+Al leer las soluciones propuestas del problema, nos vamos a dar cuenta de dos 
+técnicas ampliamente usadas: Top-Down y Memorización. Estas 
+
+\paragraph{Diferencias con el problema acá planteado}
+Dado que estamos generalizando el problema a la hora de hablar de i familias en k CADs, los
+casos base propuestos en este problema no pueden ser aplicados, ya que de por si mismos no 
+nos garantizan la correctitud del problema. Por ejemplo, pensemos en el caso base:
+\begin{verbatim}
+    //si la suma total de nums es impar, retorna false  de forma automática
+    if(total_sum%2): return False 
+\end{verbatim}
+Este caso no nos va a servir dentro de la lógica de nuestra solución porque el 
+valor de k puede ser mayor a 2, y por esto, pueden forzarse situaciones en las que la suma total
+sea impar y el resultado sea 'True', con el fin de entender esto, considerese este
+contraejemplo a partir del test 1:
+
+    $$Lemma 1: (totalSum\%2) = False $$
+    $$Lemma 2: [8, 7, 3, 4, 11] \rightarrow True \land [(8,3),(7,4),(11)] $$
+    $$< Lemma 1, \ True \land q = True, \ Lemma 2, \ 0 = Boolean \ False >$$ 
+    $$  True \rightarrow totalSum([8, 7, 3, 4, 11])\%2 = 0$$
+    $$<totalSum([8, 7, 3, 4, 11])>$$ 
+    $$True \rightarrow 33\%2 = 0$$
+    $$<33\%2 = 1 , \ 1 = Boolean \ True, \ Lemma 2>$$ 
+    $$True \rightarrow False$$
+    $$<True \ can't \ imply \ False>$$
+    $$False$$
+
+Por lo tanto, no podemos esperar que todos los casos sean divisibles por 2, y aunque
+una solución de este Leetcode nos podría resolver una cantidad limitada de casos, no podemos
+subsistir de su lógica completamente con el fin de resolver este problema, pues causará 
+falsos negativos en casos donde la suma sea impar.
+
 \subsection{Complejidad}
 \subsection{Limitantes}
+    \begin{itemize}
+        \item el archivo solo puede recibir inputs de archivos de texto, un input no
+        puede ser ingresado directamente desde el usuario a partir de la consola
+        \item es posible que el programa muera intentando analizar subcarpetas de su carpeta
+        de ingreso, por lo que se recomienda mantener los archivos de prueba en el entorno
+        raíz de la carpeta 'tests'.
+        \item Con el fin de que se pueda abrir en diferentes computadores usamos una ruta relativa
+        a la hora de escribir el entorno de ficheros de donde tomará las pruebas, si se usa este 
+        para calificar, es necesario abrir en el entorno desde la primera carpeta del proyecto en
+        caso de usar un IDE, se puede modificar la ruta de lectura, caso en el cuál debería poderse. 
+    \end{itemize}
 \subsection{Consideraciones}
+\begin{itemize}
+    \item La capacidad de tipado dinámico de Python es directamente responsable de
+    la capacidad de este algoritmo en algunos casos, gran parte de las funciones
+    de carácter lambda deberían reescribirse en caso de que se fuese a reescribir la solución
+    en un sistema de tipado estático.
+    \item se omite la primera linea del archivo que leemos porque se asume tiene la
+    cantidad de casos de prueba necesarios para el archivo, esta información nos
+    sería relevante en lenguajes como C, donde se debe configurar manualmente el manejo
+    de ciclos en situaciones como esta.
+    \item A día de hoy, este es un trabajo en grupo que realicé solo, por favor ten eso
+    en cuenta, profe.
+\end{itemize}
 %------------------------------------------------
 \section{Referencias.}
 \begin{itemize}
     \item [1]: \textit{Enunciado del proyecto, ISIS 1105 Diseño y Análisis de Algoritmos
     Semestre 2023-10. Proyecto – PARTE 1} Uniandes, 2023.
-    \item [2]: \textit{The Algorithm Design Manual, Springer}, Steven S. Skiena, .
+    \item [2]: \textit{The Algorithm Design Manual, Springer, Second Edition}, Steven S. Skiena, 2008.
+    \item [3]: \textit{416. Partition Equal Subset Sum}, Leetcode, recuperado de 
+    https://leetcode.com/problems/partition-equal-subset-sum/ , 2023.
 \end{itemize}
 \end{document}
