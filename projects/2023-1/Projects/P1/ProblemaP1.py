@@ -20,12 +20,17 @@ def solve(i: int, nums: list, subs: list[int]):
     if i >= len(nums):
         is_same = set([sum(i) for i in subs])
         if len(is_same) != 1:
-            return False
+            print(False)
+            return
         else:
             return(True, [tuple(i) for i in subs])
     else:
-        pass
-    
+        for j in range(len(subs)):
+            print(j)
+            subs[j][i] = nums[i]
+            solve(i+1, nums, subs)
+            subs[j][i] = 0
+
 def beneficiarios(k:int, i: int, nums: list[int]) -> None:
 
     #Formateo de salida.
@@ -39,7 +44,7 @@ def beneficiarios(k:int, i: int, nums: list[int]) -> None:
     for position in range(k):
         subs.append([0]*i)
     
-    
+    solve(0, nums, subs)
 
     print(subs)
 
