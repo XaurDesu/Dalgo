@@ -58,10 +58,12 @@ en Unix, así no comparta necesariamente el hardware. No se proporciona un entor
 por lo que recomiendo intentar correrlo en un entorno relativamente similar.
 
 \begin{itemize}
-    \item \textbf{Sistema Operativo: } Ubuntu 22.10 x86\_64, Minimal Install. También probado con Manjaro Linux 22.0 x86\_64
+    \item \textbf{Sistema Operativo: } Ubuntu 22.10 x86\_64, Minimal Install. También probado con Manjaro Linux 22.0 x86\_64 y Fedora
+    Linux 38 Workstation Beta x86\_64, por lo tanto se sabe que el programa en teoría podría correr en distribuciones basadas en Debian,
+    Red Hat Linux o Arch Linux, no tengo un computador con Mac OS X o BSD para probar con otros sistemas Unix
     \item \textbf{Kernel: }Linux 5.19.0-38-generic
     \item \textbf{Lenguaje de Programación: }Python 3.10.7 x86\_64, Compilado desde apt como un .deb, incluye python3-pip,
-        También probado con la versión de Arch 
+    También probado con la versión de Arch y DNF (el manejador de paquetes de Fedora/RHEL)
     \item \textbf{Librerías Utilizadas}
     \begin{itemize}
         \item os
@@ -186,7 +188,16 @@ subarreglos.
 
 \paragraph{Estrategia de solución}
 Al leer las soluciones propuestas del problema, nos vamos a dar cuenta de dos 
-técnicas ampliamente usadas: Top-Down y Memorización. Estas 
+técnicas ampliamente usadas: Top-Down y Memorización. Estas dos opciones son
+generalmente favorecidas sobre una solución de fuerza bruta debido a que:
+
+\begin{itemize}
+    \item Puede utilizar soluciones anteriores sin calcularlas otra vez
+    \item Evalúa todos los casos posibles sin redundancia
+    \item Mantiene un registro que podemos utilizar sin mucho problema
+\end{itemize}´
+
+En otras palabras, este es un problema que requiere mantener 
 
 \paragraph{Diferencias con el problema acá planteado}
 Dado que estamos generalizando el problema a la hora de hablar de i familias en k CADs, los
