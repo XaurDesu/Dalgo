@@ -142,6 +142,20 @@ de las librerías base de Python, con esta y el
 \subsection{Conceptos Teóricos Importantes}
 \subsubsection{Programación Dinámica}
 
+\subsubsection{Operaciones in-place}
+En Python, se pueden definir operaciones In-place con el operador 
+\begin{verbatim}
+    '|=' en lugar de '='
+\end{verbatim}
+el uso de esta notación nos permite ahorrar
+memoria a la hora de escribir código, al usar la misma dirección de memoria para
+almacenar el resultado, sin necesidad de hacer una nueva dirección en memoria. aunque
+lenguajes de menor nivel, como C++ o Rust (este último al que estoy contribuyendo) nos
+permiten hacer algunas operaciones de manera implicitamente in-place, la naturaleza 
+interpretada de Python hace que el manejo de estos sistemas deba escribirse explicitamente
+para forzar al compilador a consistentemente procesar la acción como in-place.
+
+
 \subsubsection{Memorización}
 La Memorización se define cómo: 'a'[2]
 
@@ -188,16 +202,61 @@ subarreglos.
 
 \paragraph{Estrategia de solución}
 Al leer las soluciones propuestas del problema, nos vamos a dar cuenta de dos 
-técnicas ampliamente usadas: Top-Down y Memorización. Estas dos opciones son
-generalmente favorecidas sobre una solución de fuerza bruta debido a que:
+técnicas ampliamente usadas: Top-Down y Memorización. Las definiciones de estos 
+términos estan dadas en la sección 3.1 de este documento, pero fuera de lo que son,
+Estas dos opciones son generalmente favorecidas sobre una solución de fuerza bruta debido a que:
 
 \begin{itemize}
     \item Puede utilizar soluciones anteriores sin calcularlas otra vez
     \item Evalúa todos los casos posibles sin redundancia
     \item Mantiene un registro que podemos utilizar sin mucho problema
-\end{itemize}´
+\end{itemize}
 
-En otras palabras, este es un problema que requiere mantener 
+En otras palabras, este es un problema que requiere mantener un registro de todos los problemas
+solucionados por el algoritmo implementado. Para ver como esto se puede pensar, voy a 
+poner 2 de las soluciones propuestas por el post de solución mejor puntuado en Leetcode:[4]
+
+\paragraph{Primera Solución: DP/Memorización Pura / Tabulación}
+
+\begin{verbatim}
+class Solution:
+    def canPartition(self, nums):
+        total_sum = sum(nums)
+        if total_sum & 1: return False
+        half_sum = total_sum // 2
+        dp = [True] + [False]*half_sum
+        for num in nums:
+            for j in range(half_sum, num-1, -1):
+                dp[j] |= dp[j-num]
+        return dp[half_sum]
+\end{verbatim}
+
+Esta solución nos muestra la forma mas concreta de implementar DP, 
+a partir del uso de una estructura de datos que nos permite 
+
+\textbf{Resultados:}
+
+\includegraphics[scale=0.7]{R1.png}
+
+\paragraph{Segunda Solución: DP/Bitmask}
+\begin{verbatim}
+class Solution:
+    def canPartition(self, nums):
+        total_sum = sum(nums)
+        if total_sum & 1: return False
+        half_sum, dp = total_sum // 2, 1
+        for num in nums:
+            dp |= dp << num
+        return dp & 1 << half_sum
+\end{verbatim}
+
+Esta segunda solución nos muestra una optimización de tiempo de ejecución importante
+de la solución con respecto a tiempo de ejecución. esta optimización se basa en el uso
+de una estructura de bits que nos permite ahorrar espacio y hacer operaciones computacionalmente
+mas simples, aunque tal vez mas abstractas para el cerebro humano.
+\textbf{Resultados:}
+
+\includegraphics[scale=0.7]{R2.png}
 
 \paragraph{Diferencias con el problema acá planteado}
 Dado que estamos generalizando el problema a la hora de hablar de i familias en k CADs, los
@@ -262,5 +321,7 @@ falsos negativos en casos donde la suma sea impar.
     \item [2]: \textit{The Algorithm Design Manual, Springer, Second Edition}, Steven S. Skiena, 2008.
     \item [3]: \textit{416. Partition Equal Subset Sum}, Leetcode, recuperado de 
     https://leetcode.com/problems/partition-equal-subset-sum/ , 2023.
+    \item [4]: \textit{416. Partition Equal Subset Sum, Solution}, 'archit91', 5 Simple Solutions w/ Explanation 
+    | Optimization from Brute-Force to DP to Bitmask ,Dec. 21, 2021
 \end{itemize}
 \end{document}
