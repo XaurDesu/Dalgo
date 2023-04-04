@@ -251,7 +251,9 @@ class Solution:
 Esta segunda solución nos muestra una optimización de tiempo de ejecución importante
 de la solución con respecto a tiempo de ejecución. esta optimización se basa en el uso
 de una estructura de bits que nos permite ahorrar espacio y hacer operaciones computacionalmente
-mas simples, aunque tal vez mas abstractas para el cerebro humano.
+mas simples, aunque tal vez mas abstractas para el cerebro humano. Entonces tomemos
+la idea de la tabla de la solución anterior. Tengamos entonces en cuenta este caso,
+sacado de la fuente:
 
 \textbf{Resultados:}
 
@@ -285,6 +287,17 @@ Por lo tanto, no podemos esperar que todos los casos sean divisibles por 2, y au
 una solución de este Leetcode nos podría resolver una cantidad limitada de casos, no podemos
 subsistir de su lógica completamente con el fin de resolver este problema, pues causará 
 falsos negativos en casos donde la suma sea impar.
+
+\subsection{La Solución}
+\subsubsection{Mantras de diseño}
+\begin{itemize}
+    \item \textbf{Hay una suma superior: }La máxima suma que puede ser válida corresponde
+    a la suma de todo el array, a partir de esto podemos hacer parte de la tabulación.
+    Esto se debe a que por el enunciado, sabemos que los números serán enteros positivos.
+    \item \textbf{Debemos poder mantener registro de las sumas: } No solo debe verse el 
+    registro de si una suma es posible, sino de las tuplas que lo hacen posible.
+\end{itemize}
+
 
 
 %------------------------------------------------

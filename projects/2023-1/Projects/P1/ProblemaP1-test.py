@@ -24,11 +24,9 @@ def beneficiarios(k:int, i: int, nums: list[int]) -> None:
     print("k =",k)
     print("i =",i)
     
-    is_possible = False
-    subs = []
-    for position in range(k):
-        subs.append([0]*i)
-    
+    sum_nums = sum(nums)
+    # 0 es siempre posible
+    possible = [True] + [False]*sum_nums
 
     print(subs)
 
