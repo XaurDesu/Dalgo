@@ -1,3 +1,4 @@
+from functools import lru_cache
 import os
 
 ARCHIVOS_PRUEBA = "projects/2023-1/Projects/P1/tests"
@@ -16,6 +17,24 @@ def abrir_archivo(file: str) -> list:
 
 soluciones = {}
 
+"""
+SOLUCION CON SOLO 2 SUBLISTAS (Vease Documento):
+class Solution:
+    def canPartition(self, nums):
+        total_sum = sum(nums)
+        if total_sum & 1: return False
+        half_sum = total_sum // 2
+        dp = [True] + [False]*half_sum
+        for num in nums:
+            for j in range(half_sum, num-1, -1):
+                dp[j] |= dp[j-num]
+        return dp[half_sum]
+"""
+
+@lru_cache(maxsize=None)
+def solve():
+    pass
+
 def beneficiarios(k:int, i: int, nums: list[int]) -> None:
 
     #Formateo de salida.
@@ -28,7 +47,18 @@ def beneficiarios(k:int, i: int, nums: list[int]) -> None:
     # 0 es siempre posible
     possible = [True] + [False]*sum_nums
 
-    print(subs)
+    subseq = []
+    for num in range(k):
+        subseq.append([0]*i)
+    
+    #Checks if this is a Decimal or an Integer.
+    target_sum = sum_nums / k
+    if target_sum != int(target_sum):
+        return False
+    
+    print(subseq)
+    print(target_sum)
+
 
 
 def main():
