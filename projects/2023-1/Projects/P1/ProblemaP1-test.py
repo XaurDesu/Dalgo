@@ -31,9 +31,7 @@ class Solution:
         return dp[half_sum]
 """
 
-@lru_cache(maxsize=None)
-def solve():
-    pass
+
 
 def beneficiarios(k:int, i: int, nums: list[int]) -> None:
 
@@ -42,20 +40,35 @@ def beneficiarios(k:int, i: int, nums: list[int]) -> None:
     print("CASO A EVALUAR: ", nums)
     print("k =",k)
     print("i =",i)
-    
-    sum_nums = sum(nums)
-    # 0 es siempre posible
-    possible = [True] + [False]*sum_nums
 
     subseq = []
     for num in range(k):
         subseq.append([0]*i)
+
+    ret = []
     
+    sum_nums = sum(nums)
+    # 0 es siempre posible
+    
+
     #Checks if this is a Decimal or an Integer.
     target_sum = sum_nums / k
     if target_sum != int(target_sum):
         return False
+
+    def solve_two():
+        dp = [[True, True]] + [[False,False]]*sum_nums
+        
+
+    def solve_three():
+        pass
     
+    if k == 2:
+        solve_two()
+    if k == 3:
+        solve_three()
+
+
     print(subseq)
     print(target_sum)
 
