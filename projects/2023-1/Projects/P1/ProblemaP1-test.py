@@ -31,35 +31,47 @@ class Solution:
         return dp[half_sum]
 """
 
+def beneficiarios(k:int, m: int, nums: list[int]):
+    """
+    
+    Uno de los principales retos de la reforma a la salud 2023 propuesta por el gobierno actual son los
+    denominados Centros de Atención Primaria (CAD). A cada CAD en el país serán asignados los
+    beneficiarios y sus familias según cercanía y disponibilidad. Para que las finanzas de estos centros
+    no se vean afectadas por una mala distribución de beneficiarios y para garantizar el mejor servicio,
+    es necesario diseñar una estrategia de asignación equitativa de beneficiarios.
+    
+    ---------------------------
 
+    Asumimos por el enunciado que: 
 
-def beneficiarios(k:int, i: int, nums: list[int]) -> None:
+    2 <= k <= 3
+    2 <= m <= 10**4
+    1 <= fi <= 50
+    
+    """
 
     #Formateo de salida.
     print("- - - - - - - - - - - - - - - - - - - - -")
     print("CASO A EVALUAR: ", nums)
     print("k =",k)
-    print("i =",i)
+    print("m =",m)
 
     subseq = []
     for num in range(k):
-        subseq.append([0]*i)
-
-    ret = []
+        subseq.append([0]*m)
     
     sum_nums = sum(nums)
-    # 0 es siempre posible
-    
 
     #Checks if this is a Decimal or an Integer.
     target_sum = sum_nums / k
     if target_sum != int(target_sum):
         return False
+    
+    print("Target sum =",target_sum)
 
     def solve_two():
-        dp = [[True, True]] + [[False,False]]*sum_nums
-        
-
+        pass
+    
     def solve_three():
         pass
     
@@ -70,7 +82,6 @@ def beneficiarios(k:int, i: int, nums: list[int]) -> None:
 
 
     print(subseq)
-    print(target_sum)
 
 
 
