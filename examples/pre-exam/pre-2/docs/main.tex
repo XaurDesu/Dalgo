@@ -44,7 +44,7 @@ def dfs(Adj, s, visited):
 
 \begin{itemize}
     \item Uso: Recorre todos los nodos de un grafo
-    \item Complejidad:
+    \item Complejidad: O(V+E)
     
 \end{itemize}
 
@@ -66,9 +66,46 @@ def bfs(Adj, s):
 
 \begin{itemize}
     \item Uso: Recorre todos los nodos de un grafo
-    \item Complejidad:
+    \item Complejidad: O(V+E)
     
 \end{itemize}
+
+
+\subsection{Dijkstra}
+\begin{verbatim}
+    def dijkstra(graph, start, end):
+    """Return the cost of the shortest path between vertices start and end.
+    >>> dijkstra(G, "E", "C")
+    6
+    >>> dijkstra(G2, "E", "F")
+    3
+    >>> dijkstra(G3, "E", "F")
+    3
+    """
+
+    heap = [(0, start)]  # cost from start node,end node
+    visited = set()
+    while heap:
+        (cost, u) = heapq.heappop(heap)
+        if u in visited:
+            continue
+        visited.add(u)
+        if u == end:
+            return cost
+        for v, c in graph[u]:
+            if v in visited:
+                continue
+            next_item = cost + c
+            heapq.heappush(heap, (next_item, v))
+    return -1
+\end{verbatim}
+
+\begin{itemize}
+    \item Uso: Recorre todos los nodos de un grafo
+    \item Complejidad: O(V^2)
+    
+\end{itemize}
+
 
 \section{Explique cual es la complejidad temporal de los algoritmos vistos en clase: BFS,
 Dijkstra, Bellman-Ford y Floyd-Warshall.}
