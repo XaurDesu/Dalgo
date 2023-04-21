@@ -18,22 +18,22 @@ class solution:
                   ciclos negativos  
         """
         dist = []
-        for i in len(self.AbjList)
-        dist.append([0]*len(self.AbjList))
+        for i in len(self.AbjList):
+            dist.append([0]*len(self.AbjList))
 
-        for i in self.AbjList.keys():
-            dist[i][i] = 0
-            for j in self.AbjList[i]:
-                dist[i][j[0]] = j[1]
-        
-        for k in range(1, len(dist)):
-            for i in range(1, len(dist)):
-                for j in range(1, len(dist)):
-                    if dist[i][i] < 0:
-                        return True
-                    if dist[i][j] > dist[i][k] + dist[k][j]:
-                        dist[i][j] = dist[i][k] + dist[k][j]
-        return False
+            for i in self.AbjList.keys():
+                dist[i][i] = 0
+                for j in self.AbjList[i]:
+                    dist[i][j[0]] = j[1]
+            
+            for k in range(1, len(dist)):
+                for i in range(1, len(dist)):
+                    for j in range(1, len(dist)):
+                        if dist[i][i] < 0:
+                            return True
+                        if dist[i][j] > dist[i][k] + dist[k][j]:
+                            dist[i][j] = dist[i][k] + dist[k][j]
+            return False
         
     def MST_Connect_All_Points(self, points: List[List[int]]) -> int:
         """

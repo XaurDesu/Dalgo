@@ -241,5 +241,123 @@ Todos estos 3 algoritmos, como explicamos anteriormente, nos devuelven el MST
 correspondiente a un grafo. Dependiendo del algoritmo concreto, van a variar los detalles concretos
 del cómo se ejecute este proceso y de las limitaciónes que llegará a tener. Tengamos en cuenta entonces, 
 que en orden de complejidad, aunque Dijkstra es el de, en teoría, menor complejidad, también es el algoritmo
-de los acá presentados mas restringido en los datasets que puede afrontar. Por ejemplo, es 
+de los acá presentados mas restringido en los datasets que puede afrontar. Por ejemplo, su limitación de 
+solo aceptar pesos positivos ya de por si lo limíta dado lo expuesto en la respuesta a la pregunta 3.
+A cambio, es mas rápido y puede darnos información mas específica sin modificaciones
+requeridas. Lo que causa esta diferencia es principalmente el hecho de que estan planteados por paradigmas diferentes
+de programación, con Dijkstra siendo un algoritmo cuya lógica esta basada en los algoritmos
+Greedy, mientras Floyd Warshall y Bellman Ford son dinámicos, permitiendoles usar soluciones a 
+subproblemas para poder calcular el MST, que resulta en una mayor complejidad al escalar el
+problema. 
+
+
+%-------------------------------
+\section{Modifique el algoritmo de Floyd-Warshall de tal forma que sea posible construir
+el camino mas corto de entre cualquier nodo del grafo. Se modifica la complejidad
+espacial o temporal del algoritmo original?}
+
+
+
+\subsection{Floyd-Warshall (Modificado)}
+\begin{verbatim}
+    def _print_dist(dist, v):
+    print("\nThe shortest path matrix using Floyd Warshall algorithm\n")
+    for i in range(v):
+        for j in range(v):
+            if dist[i][j] != float("inf"):
+                print(int(dist[i][j]), end="\t")
+            else:
+                print("INF", end="\t")
+        print()
+
+
+    def floyd_warshall(graph, v):
+        """
+        :param graph: 2D array calculated from weight[edge[i, j]]
+        :type graph: List[List[float]]
+        :param v: number of vertices
+        :type v: int
+        :return: shortest distance between all vertex pairs
+        distance[u][v] will contain the shortest distance from vertex u to v.
+        1. For all edges from v to n, distance[i][j] = weight(edge(i, j)).
+        3. The algorithm then performs distance[i][j] = min(distance[i][j], distance[i][k] +
+            distance[k][j]) for each possible pair i, j of vertices.
+        4. The above is repeated for each vertex k in the graph.
+        5. Whenever distance[i][j] is given a new minimum value, next vertex[i][j] is
+            updated to the next vertex[i][k].
+        """
+
+        dist = [[float("inf") for _ in range(v)] for _ in range(v)]
+
+        for i in range(v):
+            for j in range(v):
+                dist[i][j] = graph[i][j]
+                
+                # check vertex k against all other vertices (i, j)
+                for k in range(v):
+                    # looping through rows of graph array
+                    for i in range(v):
+                        # looping through columns of graph array
+                        for j in range(v):
+                            if (
+                                dist[i][k] != float("inf")
+                                and dist[k][j] != float("inf")
+                                and dist[i][k] + dist[k][j] < dist[i][j]
+                            ):
+                                dist[i][j] = dist[i][k] + dist[k][j]
+
+        _print_dist(dist, v)
+        return dist, v
+\end{verbatim}
+
+%-------------------------------
+\section{Explique como el algoritmo de Floyd-Warshall puede detectar si el grafo original
+tiene ciclos negativos. Algún otro de los algoritmos visto en clase permite lo mismo?}
+
+El algoritmo de Floyd Warshall mantiene en memoria una tabla, generalmente llamada en literatura
+'dist'. esta tabla lleva las distancias entre todos los nodos. Dado que sabemos que la diagonal
+va a tener una distancia de 1 al ser configurado para la detección de ciclos
+y que este algoritmo intenta minimizar las distancias, entonces podemos asumir que un resultado
+menor dentro de esta diagonal implica la detección de un ciclo, pues se encontró una forma más
+barata de entrar al propio grafo.
+
+
+%-------------------------------
+\section{Un grafo bipartito, es un grafo tal que el conjunto de nodos se puede expresar
+como dos conjuntos disjuntos, de manera que no hay dos nodos del mismo conjunto
+que sean adyacentes. Diseñe un algoritmo que reciba un grafo, en su implantación
+indique si su grafo esta implementado como lista o matriz de adyacencia, y retorne
+T rue si el grafo es bipartito y False en otro caso. La complejidad no debe superar
+O(V*E), donde V es el conjunto de nodos y E el conjunto de arcos del grafo.}
+
+\begin{verbatim}
+def bipartito(adj_list):
+
+\end{verbatim}
+
+
+%-------------------------------
+\section{Un grafo ponderado desconectado no tiene  árboles de expansión. Sin embargo, es
+posible encontrar un bosque de expansión de peso mínimo en un grafo de este tipo.
+Explique cómo modificar tanto el algoritmo de Kruskal como el algoritmo de Prim
+para hacer esto.}
+
+El algoritmo de prim y kruskal en estos casos funcionan como un grafo topológico, es
+decir, un grafo donde la ponderación de sus entre sus ejes será la distancia euclidiana
+entre los puntos. A partir de esta distancia, podemos empezar a conectar todo.
+
+en otras palabras, para hacer que ambos prim o kruskal puedan calcular un árbol de
+expansión, debemos introducir una forma de calcular distancias entre dos puntos, para
+efectos de este curso generalmente 2d, esto puede hacerse puramente con implementación. Sin 
+embargo, si se hace esto para todos los nodos dentro del grafo puede aumentar considerablemente
+la complejidad de no ser que se implementase algún tipo de backtracking que pudiese
+conectar todo el grafo revirtiendo modificaciones, cosa la cuál sinceramente no sabría 
+evaluar en complejidad como una alternativa.
+
+%-------------------------------
+\section{Explique porque el flujo máximo se alcanza cuando la red residual no contiene
+caminos de aumento.}
+
+
+
 \end{document}
