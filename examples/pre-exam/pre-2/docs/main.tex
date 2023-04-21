@@ -65,7 +65,8 @@ def bfs(Adj, s):
 \end{verbatim}
 
 \begin{itemize}
-    \item Uso: Recorre todos los nodos de un grafo
+    \item Uso: Recorre todos los nodos de un grafo a partir de ir visitando los
+    vecinos de un nodo concreto
     \item Complejidad: O(V+E)
     
 \end{itemize}
@@ -73,7 +74,7 @@ def bfs(Adj, s):
 
 \subsection{Dijkstra}
 \begin{verbatim}
-    def dijkstra(graph, start, end):
+def dijkstra(graph, start, end):
     """Return the cost of the shortest path between vertices start and end.
     >>> dijkstra(G, "E", "C")
     6
@@ -101,15 +102,144 @@ def bfs(Adj, s):
 \end{verbatim}
 
 \begin{itemize}
-    \item Uso: Recorre todos los nodos de un grafo
-    \item Complejidad: O(V^2)
+    \item Uso: Retorna el MST en el cuál se puede evidenciar el camino mas corto entre 2
+    nodos y el costo de este.
+    \item Complejidad: $O(V^2)$
     
 \end{itemize}
 
 
-\section{Explique cual es la complejidad temporal de los algoritmos vistos en clase: BFS,
-Dijkstra, Bellman-Ford y Floyd-Warshall.}
+
+\subsection{Floyd-Warshall}
+\begin{verbatim}
+
+
+    def _print_dist(dist, v):
+    print("\nThe shortest path matrix using Floyd Warshall algorithm\n")
+    for i in range(v):
+        for j in range(v):
+            if dist[i][j] != float("inf"):
+                print(int(dist[i][j]), end="\t")
+            else:
+                print("INF", end="\t")
+        print()
+
+
+    def floyd_warshall(graph, v):
+        """
+        :param graph: 2D array calculated from weight[edge[i, j]]
+        :type graph: List[List[float]]
+        :param v: number of vertices
+        :type v: int
+        :return: shortest distance between all vertex pairs
+        distance[u][v] will contain the shortest distance from vertex u to v.
+        1. For all edges from v to n, distance[i][j] = weight(edge(i, j)).
+        3. The algorithm then performs distance[i][j] = min(distance[i][j], distance[i][k] +
+            distance[k][j]) for each possible pair i, j of vertices.
+        4. The above is repeated for each vertex k in the graph.
+        5. Whenever distance[i][j] is given a new minimum value, next vertex[i][j] is
+            updated to the next vertex[i][k].
+        """
+
+        dist = [[float("inf") for _ in range(v)] for _ in range(v)]
+
+        for i in range(v):
+            for j in range(v):
+                dist[i][j] = graph[i][j]
+
+                # check vertex k against all other vertices (i, j)
+        for k in range(v):
+            # looping through rows of graph array
+            for i in range(v):
+                # looping through columns of graph array
+                for j in range(v):
+                    if (
+                        dist[i][k] != float("inf")
+                        and dist[k][j] != float("inf")
+                        and dist[i][k] + dist[k][j] < dist[i][j]
+                    ):
+                        dist[i][j] = dist[i][k] + dist[k][j]
+
+        _print_dist(dist, v)
+        return dist, v
+
+
+\end{verbatim}
+
+\begin{itemize}
+    \item Uso: Retorna el MST de un grafo.
+    \item Complejidad: $O(V^3)$
+    
+\end{itemize}
+
 
 %-------------------------------
+\section{Explique cual es la complejidad temporal de los algoritmos vistos en clase: BFS,
+Dijkstra, Bellman-Ford y Floyd-Warshall.}
+\subsection{BFS}
+Un algoritmo del tipo Breadth-First Search tiene una complejidad de $O(V+E)$, donde
+'V' son los Vertices y 'E' son los arcos, esto se da debido a que sin importar cuáles
+sean los valores, el algoritmo deberá poder acceder a todo el grafo para acabar su
+ejecución. el punto es recorrer todo el grafo.
 
+\subsection{Dijkstra}
+Dado que este algoritmo retorna un camino de minimo costo entre dos nodos, garantizar
+la existencia de este requiere recorrer todos los vertices del grafo por lo menos las
+suficientes veces para garantizar el camino del nodo inicio al final. por lo que su complejidad es
+$O(V^2)$
+
+\subsection{Bellman-Ford}
+La complejidad de Bellman Ford es $O(V*E)$, al igual que Dijkstra, nos permite recorrer
+el MST de un grafo, sin embargo, este es un poco mas lento a cambio de poder procesar una
+mayor cantidad de grafos. 
+
+\subsection{Floyd Warshall}
+La complejidad de Floyd Warshall es $O(V^3)$. nos garantiza el poder recorrer y conseguir
+el MST de cualquier grafo a cambio de velocidad, de forma parecida a aquella del
+Bellman-Ford.
+
+
+%-------------------------------
+\section{Explique por que el algoritmo de Dijkstra no funciona en un grafo que tiene arcos
+negativos, de ser necesario puede usar un ejemplo para ilustrar su explicación.}
+
+El algoritmo de Dijkstra no funciona en grafos con arcos negativos debido a que 
+esta basado en una paradigma de solución Greedy, esta estrategia implica que el algoritmo
+seleccionará la solución localmente óptima a la hora de ejecutarse. Al introducirse un ciclo negativo
+en un algoritmo de este tipo, que inherentemente esta solamente preocupado por entregar una solución
+inmediatamente menor, puede causar situaciones de este tipo:
+    
+\begin{verbatim}
+      A
+     / \
+    /   \
+   /     \
+  5       2
+ /         \
+B--(-800)--  C
+
+V={A,B,C} ; E = {(A,C,2), (A,B,5), (B,C,-800)}
+\end{verbatim}
+
+En este caso tenemos un ciclo negativo y podemos asumir que esta conectado a mas partes
+del grafo,  Si quisieramos encontrar un camino de un nodo a otro, sería 
+posible que dado lo negativa que es la conexión de B a C, un valor previamente calculado
+que pasara por estos vertices no se pudiese recalcular dada la naturaleza miope
+del algoritmo, lo cuál causaria que el resultado de el arbol que retorna un grafo con este
+ciclo fuese incorrecto. Algoritmos de grafos dinámicos podrían hacer esta recalculación,
+por lo que el algoritmo podría funcionar, en general, Dijkstra no sirve en grafos con
+vértices negativos por esta razón.
+
+
+%-------------------------------
+\section{Note que si se tiene un grafo de tamaño n se puede ejecutar Dijkstra o Bellman-
+Ford n veces y lograr el mismo resultado que Floyd-Warshall. Sabemos que
+se obtiene el mismo resultado, sin embargo, este acercamiento es equivalente? la
+complejidad temporal es la misma? la complejidad espacial?}
+
+Todos estos 3 algoritmos, como explicamos anteriormente, nos devuelven el MST 
+correspondiente a un grafo. Dependiendo del algoritmo concreto, van a variar los detalles concretos
+del cómo se ejecute este proceso y de las limitaciónes que llegará a tener. Tengamos en cuenta entonces, 
+que en orden de complejidad, aunque Dijkstra es el de, en teoría, menor complejidad, también es el algoritmo
+de los acá presentados mas restringido en los datasets que puede afrontar. Por ejemplo, es 
 \end{document}
