@@ -5,20 +5,21 @@ import java.util.Scanner; // Import the Scanner class to read text files
 
 public class Main {
 
-    public static ArrayList<Object> leerArchivo(String path) {
+    public static ArrayList<ArrayList<Integer>> leerArchivo(String path) {
         
-        ArrayList<Object> ret = new ArrayList<>(null);
+        ArrayList<ArrayList<Integer>> ret = new ArrayList<>(null);
         
         try {
             File archivo = new File(path);
             Scanner scanner = new Scanner(archivo);
             while (scanner.hasNextLine()) {
                 String linea = scanner.nextLine();
-                Object[] inputs = linea.split(" ");
-                for(Object string: inputs) {
-                    string = (int)string;
+                String[] inputs = linea.split(" ");
+                ArrayList<Integer> intInputs = new ArrayList<>();
+                for(String string: inputs) {
+                    intInputs.add( Integer.parseInt(string) );
                 }
-                ret.add(inputs);
+                ret.add(intInputs);
             } scanner.close();
         } catch (FileNotFoundException e) {
             System.out.println("No se encontró el archivo, por favor revisa el path asignado.");
@@ -27,13 +28,28 @@ public class Main {
         return ret;
     }
 
+    public static void darSolucion(ArrayList<ArrayList<Integer>> casos) {
+
+    }
+
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        System.out.println("=== CASO 2 - j.torres16 / Jaime Torres ===");
         try {
-            ArrayList<Object> casos = leerArchivo(args[0]);
+            ArrayList<ArrayList<Integer>> casos = leerArchivo(args[0]);
+            darSolucion(casos);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Parece no haberse indicado un archivo en el comando, ingresar manualmente? (y/n)");
+            Scanner scan = new Scanner(System.in);
+            String input = scan.nextLine();
             
+            if (input.equals("y")) {
+                System.out.println("Por favor, digita la dirección del archivo de prueba.");
+                input = scan.nextLine();
+                leerArchivo(input);
+                scan.close();
+            } else {
+                scan.close();
+            }
         }
     }
 }
