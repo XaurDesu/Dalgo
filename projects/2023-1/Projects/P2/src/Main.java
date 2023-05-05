@@ -1,17 +1,39 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.util.ArrayList;
+import java.util.Scanner; // Import the Scanner class to read text files
+
 public class Main {
+
+    public static ArrayList<Object> leerArchivo(String path) {
+        
+        ArrayList<Object> ret = new ArrayList<>(null);
+        
+        try {
+            File archivo = new File(path);
+            Scanner scanner = new Scanner(archivo);
+            while (scanner.hasNextLine()) {
+                String linea = scanner.nextLine();
+                Object[] inputs = linea.split(" ");
+                for(Object string: inputs) {
+                    string = (int)string;
+                }
+                ret.add(inputs);
+            } scanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No se encontró el archivo, por favor revisa el path asignado.");
+            e.printStackTrace();
+        }
+        return ret;
+    }
+
     public static void main(String[] args) {
-        // Press Alt+Intro with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
-
-        // Press Mayús+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
-
-            // Press Mayús+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+        System.out.println("Hello World!");
+        try {
+            ArrayList<Object> casos = leerArchivo(args[0]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Parece no haberse indicado un archivo en el comando, ingresar manualmente? (y/n)");
+            
         }
     }
 }
