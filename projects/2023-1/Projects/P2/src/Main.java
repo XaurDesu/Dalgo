@@ -55,7 +55,7 @@ public class Main {
             }
 
             Solution solve = new Solution(N, M, caso);
-            
+            solve.problemSolution();
         }
     }
 
