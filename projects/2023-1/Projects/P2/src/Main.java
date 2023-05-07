@@ -1,6 +1,7 @@
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner; // Import the Scanner class to read text files
 
 public class Main {
@@ -53,19 +54,32 @@ public class Main {
                 }
             }
 
-            resolverCaso(N, M, caso);
+            HashMap<Integer, ArrayList<ArrayList<Integer>>> input = darAdjList(caso);
+            System.out.println(input);
         }
     }
 
-    public static void resolverCaso(int N, int M, ArrayList<ArrayList<Integer>> caso) {
-        ArrayList<Integer> ret = new ArrayList<>();
-        
-        for (ArrayList<Integer> conexion: caso) {
-            int origin = conexion.get(0);
-            int destination = conexion.get(1);
-            int type = conexion.get(2);
+    public static HashMap<Integer, ArrayList<ArrayList<Integer>>> darAdjList(ArrayList<ArrayList<Integer>> caso) {
+        //hacer lista de adyacencia
+        HashMap<Integer, ArrayList<ArrayList<Integer>>> adjList = new HashMap<Integer, ArrayList<ArrayList<Integer>>>(); 
 
+        for (ArrayList<Integer> conexion: caso) {
+            if (!adjList.containsKey(conexion.get(0))) {
+                ArrayList<ArrayList<Integer>> connect = new ArrayList<>(); 
+                connect.add(new ArrayList<>());
+                connect.get(0).add(conexion.get(1));
+                connect.get(0).add(conexion.get(2));
+                adjList.put(conexion.get(0),connect);
+            } else {
+                ArrayList<Integer> connect = new ArrayList<>(); 
+                connect.add(conexion.get(1));
+                connect.add(conexion.get(2));
+
+                adjList.get(conexion.get(0)).add(connect);
+            }
         }
+
+        return adjList;
     }
 
     public static void main(String[] args) {
