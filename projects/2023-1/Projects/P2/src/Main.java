@@ -42,7 +42,6 @@ public class Main {
             int N = casos.get(i).get(0);
             int M = casos.get(i).get(1);
             
-            System.out.println(casos.get(i));
             i += 1;
 
             while (casos.get(i).size() == 3) {
@@ -54,13 +53,22 @@ public class Main {
                 }
             }
 
-            Solution solve = new Solution(N, M, caso);
-            solve.problemSolution();
+            resolverCaso(N, M, caso);
+        }
+    }
+
+    public static void resolverCaso(int N, int M, ArrayList<ArrayList<Integer>> caso) {
+        ArrayList<Integer> ret = new ArrayList<>();
+        
+        for (ArrayList<Integer> conexion: caso) {
+            int origin = conexion.get(0);
+            int destination = conexion.get(1);
+            int type = conexion.get(2);
+
         }
     }
 
     public static void main(String[] args) {
-        System.out.println("=== CASO 2 - j.torres16 / Jaime Torres ===");
         try {
             ArrayList<ArrayList<Integer>> casos = leerArchivo(args[0]);
             darSolucion(casos);
