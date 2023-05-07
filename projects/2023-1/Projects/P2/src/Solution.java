@@ -10,6 +10,12 @@ public class Solution {
         int N = this.N;
         int M = this.M;
         ArrayList<ArrayList<Integer>> caso = this.caso;
+
+        for (ArrayList<Integer> conexion: caso) {
+            int origin = conexion.get(0);
+            int destination = conexion.get(1);
+            int type = conexion.get(2);
+        }
     }
 
     public Solution(int N, int M, ArrayList<ArrayList<Integer>> caso) {
