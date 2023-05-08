@@ -1,3 +1,4 @@
+
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.ArrayList;
@@ -30,7 +31,6 @@ public class Main {
     }
 
     public static void darSolucion(ArrayList<ArrayList<Integer>> casos) {
-        int numCasos = casos.get(0).get(0);
 
         for(int i = 1; i < casos.size(); i++) {
             
@@ -50,21 +50,42 @@ public class Main {
                     i += 1;
                 } else {
                     break;
-                }
+                } 
             }
             
             boolean[] visited = new boolean[N-1];
-            int[] redundant = new int[M-1];
+            
+            int[] redundant = new int[caso.size()];
 
-
-
-            HashMap<Integer, ArrayList<ArrayList<Integer>>> input = darAdjList(caso);
-            System.out.println(input);
+            //HashMap<Integer, ArrayList<ArrayList<Integer>>> input = darAdjList(caso);
+            redundant = bruteForce(redundant, caso);
+            for(int connection: redundant) {
+                System.out.print(connection+ " ");
+            }
+            System.out.println();
+            
         }
     }
 
-    public void dfs (int[] redundant, boolean[] visited, caso) {
+    //Metodo de fuerza bruta, no recomendado. Pero es una primera aproximación para explicarse en los casos de prueba
+    public static int[] bruteForce (int[] redundant, ArrayList<ArrayList<Integer>> caso) {
+        
+        ArrayList<ArrayList<Integer>> exists = new ArrayList<>();
 
+        for (int i = 0; i < redundant.length; i++) {
+            ArrayList<Integer> connection = new ArrayList<>();
+            connection.add(caso.get(i).get(0));
+            connection.add(caso.get(i).get(1));
+
+            if(!exists.contains(connection)) {
+                exists.add(connection);
+                redundant[i] = 0;
+            } else {
+                redundant[i] = 1;
+            }
+        }
+
+        return redundant;
     }
 
     public static HashMap<Integer, ArrayList<ArrayList<Integer>>> darAdjList(ArrayList<ArrayList<Integer>> caso) {
