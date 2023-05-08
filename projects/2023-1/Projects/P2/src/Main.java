@@ -31,7 +31,6 @@ public class Main {
 
     public static void darSolucion(ArrayList<ArrayList<Integer>> casos) {
         int numCasos = casos.get(0).get(0);
-        System.out.println(numCasos);
 
         for(int i = 1; i < casos.size(); i++) {
             
@@ -53,10 +52,19 @@ public class Main {
                     break;
                 }
             }
+            
+            boolean[] visited = new boolean[N-1];
+            int[] redundant = new int[M-1];
+
+
 
             HashMap<Integer, ArrayList<ArrayList<Integer>>> input = darAdjList(caso);
             System.out.println(input);
         }
+    }
+
+    public void dfs (int[] redundant, boolean[] visited, caso) {
+
     }
 
     public static HashMap<Integer, ArrayList<ArrayList<Integer>>> darAdjList(ArrayList<ArrayList<Integer>> caso) {
