@@ -15,13 +15,14 @@ def abrir_archivo(file: str) -> list:
 
 #Problema detectado: vertex cover
 def solve(n, m, caso):
-    print
 
     politician_graph = {}
     citizen_graph = {}
+    #generación primer grafo
     for i in range(n):
         citizen_graph[i+1] = caso[i]
-
+    
+    #generación segundo grafo.
     for i in range(1, m+1):
         citizens_into = []
         for j in range(1, n+1):
